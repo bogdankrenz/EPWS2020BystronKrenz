@@ -24,4 +24,11 @@ Liljeström, S., Juslin, P. N., & Västfjäll, D. (2013). Experimental evidence 
 Weinberg, M. K., & Joseph, D. (2017). If you’re happy and you know it: Music engagement and subjective wellbeing. *Psychology of Music*, 45(2), 257–267. https://doi.org/10.1177/0305735616659552 (abgerufen am 15.11.2020)
 
 
+*"Participants exposed to their self-selected music were most efficient, perceived lowest distraction, highest enjoyment, liking and appropriateness, and experienced a reduction in tension-anxiety. In contrast, performance and experience were poorest when exposed to High-Arousal experimenter-selected music. Participants were most inaccurate, perceived highest distraction, lowest liking, enjoyment and appropriateness, and experienced an increase in tension-anxiety."*
+
+Cassidy, G., & Macdonald, R. (2009). The effects of music choice on task performance: A study of the impact of self-selected and experimenter-selected music on driving game performance and experience. Musicae Scientiae, 13(2), 357–386. https://doi.org/10.1177/102986490901300207 (abgerufen am 15.11.2020)
+
+
+
+
 
