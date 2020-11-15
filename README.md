@@ -12,7 +12,7 @@ Wir vermissen Partys, ganz klar. Was wir nicht vermissen ist die teilweise sehr 
 Betrachtet man die Domäne des gemeinsamen Musikhörens so fällt auf, dass diese unterschiedliche Ausprägungen hat. Oftmals steht die Musik im Mittelpunkt, beispielsweise bei Partys. In anderen Fällen ist die Musik unbewusste Begleitung, so zum Beispiel in Restaurants oder Einkaufszentren. Was die Szenarien gemeinsam haben ist, dass die Zuhöhrenden im regelfall keinen Einfluss auf die gespielte Musik haben. Problematisch ist dies, da Studien zeigen (s. Quellenbelege), dass Zuhöhrende intensivere Emotionen empfinden sowie das persönliche wohlbefinden und die Leistungsfähigkeit steigt, wenn diese die gespielte Musik selbst beeinflussen können.
 
 #### Domänenmodell
-<img width="780" alt="image" src="https://user-images.githubusercontent.com/44359333/99183741-5c01a780-273e-11eb-91b6-2879768f366c.png">
+<img width="820" alt="image" src="https://user-images.githubusercontent.com/44359333/99183741-5c01a780-273e-11eb-91b6-2879768f366c.png">
 
 #### Quellenbelege zur Existenz des Problemraums
 
