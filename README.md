@@ -9,10 +9,21 @@ Wir vermissen Partys, ganz klar. Was wir nicht vermissen ist die teilweise sehr 
 
 ### Problemraum
 
-Betrachtet man die Domäne des gemeinsamen Musikhörens so fällt auf, dass diese unterschiedliche Ausprägungen hat. Oftmals steht die Musik im Mittelpunkt, beispielsweise bei Partys. In anderen Fällen ist die Musik unbewusste Begleitung, so zum Beispiel in Restaurants oder Einkaufszentren. Was die Szenarien gemeinsam haben ist, dass die Zuhöhrenden im Regelfall keinen Einfluss auf die gespielte Musik haben. Problematisch ist dies, da Studien zeigen (s. Quellenbelege), dass Zuhöhrende intensivere Emotionen empfinden sowie das persönliche Wohlbefinden und die Leistungsfähigkeit steigt, wenn diese die gespielte Musik selbst beeinflussen können.
+Betrachtet man die Domäne des gemeinsamen Musikhörens so fällt auf, dass diese unterschiedliche Ausprägungen hat. Oftmals steht die Musik im Mittelpunkt, beispielsweise bei Partys. In anderen Fällen ist die Musik unbewusste Begleitung, so zum Beispiel in Restaurants oder Einkaufszentren. Was die Szenarien gemeinsam haben ist, dass die Zuhöhrenden im regelfall keinen Einfluss auf die gespielte Musik haben. Problematisch ist dies, da Studien zeigen (s. Quellenbelege), dass Zuhöhrende intensivere Emotionen empfinden sowie das persönliche wohlbefinden und die Leistungsfähigkeit steigt, wenn diese die gespielte Musik selbst beeinflussen können.
 
 #### Domänenmodell
 <img width="820" alt="image" src="https://user-images.githubusercontent.com/44359333/99183741-5c01a780-273e-11eb-91b6-2879768f366c.png">
+
+
+
+### Zielsetzung und Vision
+
+Das Ziel von dem Projekt wird es sein einen Prototyp zu entwickeln auf der Basis von einem Proof of Concept. Die große Vision ist es dabei den "Flow" der Veranstaltung in den Vordergrund zu stellen, und den User nicht mit unnötigen Informationen zu belasten und die Möglichkeit zu geben, voll und ganz sich der Veranstaltung zu widmen, anstatt durch die "dichten Wälder" der Webanwendung zu navigieren.
+Um diese Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich der User mit seinem bevorzugten Musik-Streaming Dienst anmeldet. Innerhalb der Applikation wird zwischen Host/Receiver und Guest/Provider unterschieden. Der Host/Receiver ist der Veranstaltungsleiter oder Verantwortlicher für die Musik. Er bestellt mit den gewünschten Parametern eine Liste mit Liedern. Der Guest/Provider meldet sich mit seinem bevorzugten Streaming-Dienst an und gibt somit seine "Lieblingslieder" frei. Anhand der gewählten Parameter des Hosts/Receivers wird eine Liste erstellt.
+Nun weiß unser Host welche Musik sich seine Partygäste wirklich wünschen und kann für eine dementsprechende Atmosphäre sorgen!
+
+
+
 
 #### Quellenbelege zur Existenz des Problemraums
 
