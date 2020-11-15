@@ -23,6 +23,14 @@ Um diese Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich der
 Nun weiß unser Host welche Musik sich seine Partygäste wirklich wünschen und kann für eine dementsprechende Atmosphäre sorgen!
 
 
+### Relevanz verdeutlichen
+
+Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger Dienste oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist es nicht wirklich anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit braucht. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und starren auf das Handy. 
+Man kann damit ganz den "Flow" der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
+
+
+
+
 
 
 #### Quellenbelege zur Existenz des Problemraums
