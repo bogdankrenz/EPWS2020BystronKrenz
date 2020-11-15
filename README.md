@@ -5,7 +5,7 @@ Projektziel: **Ermöglichung einer demokratisch basierten Musikwahl bei Partys u
 
 ## Exposé
 
-Wir vermissen Partys, ganz klar. Was wir nicht vermissen ist die teilweise sehr schlechte auf Partys. Egal ob Hausparty, im Club oder bei Großveranstaltungen: Viel zu oft läuft Musik, die zu vielen Anwesenden nicht gefällt. Das wollen wir ändern.
+Wir vermissen Partys, ganz klar. Was wir nicht vermissen ist die teilweise sehr schlechte Musik auf Partys. Egal ob Hausparty, im Club oder bei Großveranstaltungen: Viel zu oft läuft Musik, die zu vielen Anwesenden nicht gefällt. Das wollen wir ändern.
 
 ### Problemraum
 
