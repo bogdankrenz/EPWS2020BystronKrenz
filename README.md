@@ -18,3 +18,10 @@ Wir vermissen Partys, ganz klar. Was wir nicht vermissen ist die teilweise sehr 
 
 Experimental evidence of the  roles of music choice, social  context, and listener personality in emotional reactions to music | Simon Liljeström, Patrik N. Juslin and Daniel Västfjäll | DOI: 10.1177/0305735612440615 published online 1 May 2012 | abgerufen am 15.11.2020 unter https://www.researchgate.net/publication/257365394_Experimental_evidence_of_the_roles_of_music_choice_social_context_and_listener_personality_in_emotional_reactions_to_music
 
+
+*"The findings also emphasised the important role of engaging with music in the company of others with regard to SWB [subjective wellbeing], highlighting an interpersonal feature of music."*
+
+Weinberg, M. K., & Joseph, D. (2017). If you’re happy and you know it: Music engagement and subjective wellbeing. *Psychology of Music*, 45(2), 257–267. https://doi.org/10.1177/0305735616659552
+
+
+
