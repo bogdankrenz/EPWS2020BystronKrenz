@@ -24,8 +24,8 @@ Um dieses Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich de
 
 ### Relevanz
 
-Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger Dienste oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist es nicht wirklich anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit braucht. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und starren auf das Handy. 
-Man kann damit ganz den "Flow" der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
+Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger Dienste oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist es nicht wirklich anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit erfordert. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und Starren auf das Handy. 
+Man kann so ganz dem Flow der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
 
 
 
