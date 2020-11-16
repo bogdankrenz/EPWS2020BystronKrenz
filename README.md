@@ -18,12 +18,17 @@ Betrachtet man die Domäne des gemeinsamen Musikhörens so fällt auf, dass dies
 
 ### Zielsetzung und Vision
 
-Das Ziel von dem Projekt wird es sein einen Prototyp zu entwickeln auf der Basis von einem Proof of Concept. Die große Vision ist es dabei den "Flow" der Veranstaltung in den Vordergrund zu stellen, und den User nicht mit unnötigen Informationen zu belasten und die Möglichkeit zu geben, voll und ganz sich der Veranstaltung zu widmen, anstatt durch die "dichten Wälder" der Webanwendung zu navigieren.
+Das Ziel des Projekt ist es einen Prototyp auf Basis eines Proof of Concepts zu entwickeln. Die große Vision ist es dabei den "Flow" der Veranstaltung in den Vordergrund zu stellen, und den User nicht mit unnötigen Informationen zu belasten und die Möglichkeit zu geben, voll und ganz sich der Veranstaltung zu widmen, anstatt durch die "dichten Wälder" der Webanwendung zu navigieren.
 Um diese Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich der User mit seinem bevorzugten Musik-Streaming Dienst anmeldet. Innerhalb der Applikation wird zwischen Host/Receiver und Guest/Provider unterschieden. Der Host/Receiver ist der Veranstaltungsleiter oder Verantwortlicher für die Musik. Er bestellt mit den gewünschten Parametern eine Liste mit Liedern. Der Guest/Provider meldet sich mit seinem bevorzugten Streaming-Dienst an und gibt somit seine "Lieblingslieder" frei. Anhand der gewählten Parameter des Hosts/Receivers wird eine Liste erstellt.
 Nun weiß unser Host welche Musik sich seine Partygäste wirklich wünschen und kann für eine dementsprechende Atmosphäre sorgen!
 
+*Vorschlag Carlos:*
 
-### Relevanz verdeutlichen
+Stell dir vor du kommst auf eine Party und der DJ weiß ganz genau welche Musik die Gäste mögen - als hätte er jeden persönlich am Eingang befragt. Genau das ist die Vision hinter unserer Projektidee. Die Idee ist es dabei den Flow der Veranstaltung nicht zu stören, um dem User die Möglichkeit zu geben, sich voll und ganz  der Veranstaltung zu widmen.
+Um dieses Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich der User mit seinem bevorzugten Musik-Streaming Dienst anmeldet. Innerhalb der Applikation wird zwischen Host und Guest unterschieden. Der Host ist der Veranstaltungsleiter oder Verantwortlicher für die Musik. Der Guest meldet sich mit seinem bevorzugten Streaming-Dienst an und gibt somit seine "Lieblingslieder" frei. Anhand gewählter Parameter des Hosts wird eine Liste mit Liedern erstellt, die möglichst vielen Gästen gefällt. Nun weiß unser Host welche Musik sich seine Partygäste wirklich wünschen und kann für eine entsprechende Atmosphäre sorgen!
+
+
+### Relevanz
 
 Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger Dienste oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist es nicht wirklich anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit braucht. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und starren auf das Handy. 
 Man kann damit ganz den "Flow" der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
