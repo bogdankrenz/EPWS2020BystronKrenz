@@ -24,11 +24,8 @@ Um dieses Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich de
 
 ### Relevanz
 
-Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger Dienste oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist es nicht wirklich anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit erfordert. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und Starren auf das Handy. 
+Die wirtschaftliche Relevanz eines Dienstes der passgenaue Musik für Veranstaltungen zusammenstellt wird spätestens bei einem Blick in die Quellenbelege eminent. Doch wir gehen einen Schritt weiter und schaffen durch eine Reduzierung der nötigen Zeit am Smartphone zum Auswählen der Musik auch eine gesellschaftliche Relevanz. Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist das nicht anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit erfordert. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und Starren auf das Handy. 
 Man kann so ganz dem Flow der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
-
-
-
 
 
 
