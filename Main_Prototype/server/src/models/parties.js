@@ -1,4 +1,5 @@
-import { Schema, Model } from "mongoose"
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const partiesSchema = new Schema({
     admin: String,
@@ -6,4 +7,4 @@ const partiesSchema = new Schema({
     songs: [String]
 })
 
-module.exports = Model("parties", partiesSchema)
+export default mongoose.model("parties", partiesSchema)
