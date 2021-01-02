@@ -1,35 +1,31 @@
 import { Router } from "express"
-import Party from "../models/parties.js"
+import Song from "../models/parties.js"
 
 const router = Router()
 
-// Get all parties
+// Get all songs
 router.get("/", async (req, res) => {
     try {
-        const parties = Party.find({})
-        res.send(`Here are all parties: /${parties}`)
+        const songs = Song.find({})
+        res.send(`Here are all songs: /${songs}`)
     } catch {
 
     }
-
-    
 })
 
-//Create new party
+//Create new song
 router.post("/", (req, res) => {
-    const party = new Party({
-        admin: Carlos,
-        userCount: 1,
-        songs: []
+    const song = new Song({
+      
     })
 
-    party.save((err, newParty) => {
+    song.save((err, newSong) => {
         if (err) {
             res.send("Error occurred")
             console.error(err)
         } else {
             //res.redirect(`parties/${newParty.id}`)
-            res.redirect("parties")
+            res.redirect("songs")
         }
     })
 })
