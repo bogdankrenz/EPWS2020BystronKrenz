@@ -3,6 +3,8 @@ import Party from "../models/parties.js"
 
 const router = Router()
 
+// ROUTES RELATED TO ALL PARTIES
+
 // Get all parties
 router.get("/", async (req, res) => {
     try {
@@ -10,36 +12,6 @@ router.get("/", async (req, res) => {
         res.send(parties)
     } catch {
 
-    }
-})
-
-// Get specific party
-router.get("/:partyId", async (req, res) => {
-    try {
-        const party = await Party.find({_id : req.params.partyId})
-        res.send(party)
-    } catch {
-        res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
-    }
-})
-
-// Add a new guest
-router.put("/:partyId/newGuest", async (req, res) => {
-    try {
-        let party = await Party.find({_id : req.params.partyId})
-        party[0].userCount++
-        
-        party[0].save((err, newParty) => {
-            if (err) {
-                res.status(500).send("Error occurred")
-                console.error(err)
-            } else {
-                res.send(newParty)
-            }
-        })
-
-    } catch {
-        res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
     }
 })
 
@@ -60,6 +32,40 @@ router.post("/", (req, res) => {
             res.send(newParty)
         }
     })
+})
+
+
+
+// ROUTES RELATED TO ONE SPECIFIC PARTY
+
+// Get specific party
+router.get("/:partyId", async (req, res) => {
+    try {
+        const party = await Party.find({_id : req.params.partyId})
+        res.send(party)
+    } catch {
+        res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
+    }
+})
+
+// Add a new guest
+router.put("/:partyId/newGuest", async (req, res) => {
+    try {
+        let party = await Party.find({_id : req.params.partyId})
+        party[0].userCount++
+
+        party[0].save((err, newParty) => {
+            if (err) {
+                res.status(500).send("Error occurred")
+                console.error(err)
+            } else {
+                res.send(newParty)
+            }
+        })
+
+    } catch {
+        res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
+    }
 })
 
 export default router
