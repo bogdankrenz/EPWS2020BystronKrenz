@@ -7,4 +7,4 @@ const songsSchema = new Schema({
     voteCount: Number,
 })
 
-export default mongoose.model("songs", songsSchema)
+export default mongoose.model("Songs", songsSchema)

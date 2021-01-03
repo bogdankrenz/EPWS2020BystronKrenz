@@ -2,9 +2,10 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const partiesSchema = new Schema({
+    partyName: { type: String, required: true },
     admin: String,
-    userCount: Number,
-    songs: [String]
+    userCount: { type: Number, default: 0 },
+    songs: { type: [String], default: [] }
 })
 
-export default mongoose.model("parties", partiesSchema)
+export default mongoose.model("Parties", partiesSchema)
