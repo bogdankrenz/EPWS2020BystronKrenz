@@ -16,6 +16,16 @@ this.addEventListener("install", (e) => {
 })
 
 this.addEventListener("fetch", (e) => {
+    if(e.request.url === "http://localhost:3000/static/js/main.chunk.js"){
+        e.waitUntil(
+            this.registration.showNotification("Vote now!", {
+                body: "How did you like the songs so far?",
+            })
+        )
+    }
+
+    
+    /*  */
     if(!navigator.onLine){
         e.respondWith(
             caches.match(e.request).then((res) => {
