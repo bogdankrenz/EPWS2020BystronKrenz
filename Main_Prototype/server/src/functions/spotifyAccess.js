@@ -9,7 +9,14 @@ import Song from "../models/songs.js"
 
 export default async function addUserTracksToParty(token, party){
 
-    const url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10"
+    // long_term (calculated from several years of data and including all new data as it becomes available)
+    // medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term
+    const timeRange = "short_term"
+
+    // The number of entities to return. Default: 20. Minimum: 1. Maximum: 50
+    const limit = "10"
+
+    const url = `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 
     var header = {
         method: 'GET',
