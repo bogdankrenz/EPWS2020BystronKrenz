@@ -2,9 +2,16 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const songsSchema = new Schema({
-    spotifyID: String,
+    _id: String,
     title: String,
-    voteCount: Number,
+    explicit: Boolean,
+    duration_s: Number,
+    images: {
+        height: Number,
+        url: String,
+        width: Number
+    },
+    votes: Number,
 })
 
 export default mongoose.model("Songs", songsSchema)
