@@ -14,7 +14,7 @@ export default async function addUserTracksToParty(token, party){
     var header = {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer BQCNPJfSSlXyEBDhyZjGy_EsSu_I_lrJzpG6XXk6p144NwYXxeCOiTnyqk49F0LlodoxBhuUMnTp59hKtm2CEVUEg6MxKA30Ue0egNiJpdGMUtSX7R0USTCwLv1W2Fgfkd_mPlTsISCeuEa70H2qzg',
+            'Authorization': `Bearer ${token}`,
         }
     }
 

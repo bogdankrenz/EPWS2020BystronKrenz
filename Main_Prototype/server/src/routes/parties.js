@@ -52,9 +52,12 @@ router.get("/:partyId", async (req, res) => {
 // Add a new guest
 router.put("/:partyId/newGuest", async (req, res) => {
     try {
+        let token = req.query.token
         let party = await Party.findById(req.params.partyId)
         party.userCount++
-        await addUserTracksToParty("Bella ciao", party)
+
+        // addUserTracksToParty is called to add the users prefered songs to the partys song list
+        await addUserTracksToParty(token, party)
 
         party.save((err, newParty) => {
             if (err) {
