@@ -1,5 +1,6 @@
 import { Router } from "express"
 import Party from "../models/parties.js"
+import addUserTracksToParty from "../functions/spotifyAccess.js"
 
 const router = Router()
 
@@ -17,11 +18,11 @@ router.get("/", async (req, res) => {
 
 //Create new party
 router.post("/", (req, res) => {
-    let partyName = req.query.name
+    let partyName = req.query.partyName
 
     const party = new Party({
         partyName: partyName,
-        admin: 'Bogdan',
+        admin: 'Carlos',
     })
 
     party.save((err, newParty) => {
@@ -51,10 +52,11 @@ router.get("/:partyId", async (req, res) => {
 // Add a new guest
 router.put("/:partyId/newGuest", async (req, res) => {
     try {
-        let party = await Party.find({_id : req.params.partyId})
-        party[0].userCount++
+        let party = await Party.findById(req.params.partyId)
+        party.userCount++
+        await addUserTracksToParty("Bella ciao", party)
 
-        party[0].save((err, newParty) => {
+        party.save((err, newParty) => {
             if (err) {
                 res.status(500).send("Error occurred")
                 console.error(err)
