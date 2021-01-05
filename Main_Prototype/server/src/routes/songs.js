@@ -13,4 +13,14 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Get all songs from a specific party 
+router.get("/:partyId", async (req, res) => {
+    try {
+        const songs = await Song.find({partyID : req.params.partyId})
+        res.send(songs)
+    } catch {
+
+    }
+})
+
 export default router

@@ -1,5 +1,6 @@
 import { Router } from "express"
 import Party from "../models/parties.js"
+import Song from "../models/songs.js"
 import addUserTracksToParty from "../functions/spotifyAccess.js"
 
 const router = Router()
@@ -70,6 +71,16 @@ router.put("/:partyId/newGuest", async (req, res) => {
 
     } catch {
         res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
+    }
+})
+
+// Get all songs from a specific party 
+router.get("/:partyId/songs", async (req, res) => {
+    try {
+        const songs = await Song.find({partyID : req.params.partyId})
+        res.send(songs)
+    } catch {
+        console.error("Error occured")
     }
 })
 
