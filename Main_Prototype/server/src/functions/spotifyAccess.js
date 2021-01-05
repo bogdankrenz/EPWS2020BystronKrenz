@@ -36,16 +36,17 @@ export default async function addUserTracksToParty(token, party){
     }
 
     await json.items.forEach(async (song) => {
-        
+
         // Prüfen ob der Künstler bereits in DB gespeichert ist
-        let existingArtist = party.artists.id(song.artists[0].id)
+        const artistID = `${party._id}-${song.artists[0].id}`
+        const existingArtist = party.artists.id(artistID)
 
         // Wenn Künstler nicht in DB gespeichert -> neuen Künstler anlegen u. Song speichern
         if(!existingArtist){
             const newSong = addSong(song)
 
             var artist = {
-                _id: song.artists[0].id,
+                _id: artistID,
                 name: song.artists[0].name,
                 votes: 1,
                 songs: newSong
@@ -54,7 +55,8 @@ export default async function addUserTracksToParty(token, party){
 
         } else {
             // Wenn Künstler bereits in DB gespeichert -> Prüfen ob Song ebenfalls vorhanden ist
-            let existingSongID = existingArtist.songs.find(songID => songID == song.id)
+            const songID = `${party._id}-${song.id}`
+            const existingSongID = existingArtist.songs.find(existingSongID => existingSongID == songID)
 
             // Wenn Künstler in DB gespeichert u. Song noch nicht -> Neuen Song hinzufügen und speichern
             if(!existingSongID){
@@ -70,8 +72,9 @@ export default async function addUserTracksToParty(token, party){
     });
 
     function addSong(song) {
+        const songID = `${party._id}-${song.id}`
         const newSong = new Song({
-            _id: song.id,
+            _id: songID,
             title: song.name,
             explicit: song.explicit,
             duration_s: song.duration_ms / 1000,
