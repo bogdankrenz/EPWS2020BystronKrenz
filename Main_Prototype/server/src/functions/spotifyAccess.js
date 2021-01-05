@@ -75,14 +75,12 @@ export default async function addUserTracksToParty(token, party){
         const songID = `${party._id}-${song.id}`
         const newSong = new Song({
             _id: songID,
+            partyID: party._id,
             title: song.name,
+            artist: song.artists[0].name,
             explicit: song.explicit,
             duration_s: song.duration_ms / 1000,
-            images: {
-                height: 100,
-                url: "Not done yet",
-                width: 100
-            },
+            images: song.album.images,
             votes: 1,
         })
         newSong.save((err) => { if (err) { console.error(err)}  })
