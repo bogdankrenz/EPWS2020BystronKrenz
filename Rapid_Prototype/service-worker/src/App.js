@@ -1,5 +1,6 @@
 import { Navbar, Nav } from "react-bootstrap";
 import "./App.css";
+import hash from "./hash";
 import Home from "./components/Home/Home.jsx";
 import CreateParty from "./components/Party/Host/CreateParty.jsx";
 import PartyDetails from "./components/Party/Guest/PartyDetails.jsx";
