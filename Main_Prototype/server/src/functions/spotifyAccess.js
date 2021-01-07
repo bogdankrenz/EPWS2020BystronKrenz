@@ -25,6 +25,8 @@ export default async function addUserTracksToParty(token, party){
         }
     }
 
+    var userSongs = []
+
     const response = await fetch(url, header)
     const json = await response.json()
 
@@ -67,9 +69,11 @@ export default async function addUserTracksToParty(token, party){
                 const existingSong = await Song.findById(existingSongID)
                 existingSong.votes++
                 existingSong.save((err) => {if (err) {console.error(err)}})
+
+                userSongs.push(existingSong)
             }
         }
-    });
+    })
 
     function addSong(song) {
         const songID = `${party._id}-${song.id}`
@@ -84,6 +88,9 @@ export default async function addUserTracksToParty(token, party){
             votes: 1,
         })
         newSong.save((err) => { if (err) { console.error(err)}  })
+        userSongs.push(newSong)
         return newSong
     }
+
+    return userSongs
 }

@@ -58,15 +58,14 @@ router.put("/:partyId/newGuest", async (req, res) => {
         party.userCount++
 
         // addUserTracksToParty is called to add the users prefered songs to the partys song list
-        await addUserTracksToParty(token, party)
+        const userTracks = await addUserTracksToParty(token, party)
 
-        party.save((err, newParty) => {
-            if (err) {
-                res.status(500).send("Error occurred")
+        party.save((err) => { 
+            if (err) { 
                 console.error(err)
             } else {
-                res.send(newParty)
-            }
+                res.send(userTracks)
+            }  
         })
 
     } catch {
