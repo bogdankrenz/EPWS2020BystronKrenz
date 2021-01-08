@@ -14,7 +14,8 @@ const partiesSchema = new Schema({
             default: [],
             ref: "Songs"
         }
-    }]
+    }],
+    has_Outliers: Boolean
 })
 
 export default mongoose.model("Parties", partiesSchema)
