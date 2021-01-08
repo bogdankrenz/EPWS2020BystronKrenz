@@ -5,25 +5,29 @@ import hash from "../../../hash";
 
 function PartyDetails() {
   const [songs, setSongs] = useState({});
+  const [isLoading, setLoading] = useState(true);
   const location = useLocation();
   console.log(location.pathname);
 
   let _token = hash.access_token;
 
   useEffect(() => {
-    if (!_token) {
-      alert("There was an error during the authentication");
-    } else {
-      axios
-        .put(
-          `https://party-together.herokuapp.com/parties/5ff8288c73949c001795f553/newGuest?token=${_token}`
-        )
-        .then((res) => {
-          setSongs(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
+    axios
+      .put(
+        `https://party-together.herokuapp.com/parties/5ff8288c73949c001795f553/newGuest?token=${_token}`
+      )
+      .then((res) => {
+        setSongs(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  if (isLoading) {
+    return <h3>Loading...</h3>;
+  }
+  console.log(songs);
+  console.log(_token);
   return (
     <div>
       <h3>Welcome to Party Together!</h3>
@@ -35,10 +39,6 @@ function PartyDetails() {
             <img src={song.images[2].url} alt="album-cover" />
             <h5 style={{ display: "inline-block", margin: "2px" }}>
               {song.artist} - {song.title}
-            </h5>
-            <h5 style={{ display: "inline-block", margin: "2px" }}></h5>
-            <h5 style={{ display: "inline-block", margin: "2px" }}>
-              votes: {song.votes}
             </h5>
           </div>
         );
