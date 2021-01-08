@@ -42,12 +42,13 @@ export default function Home() {
     <div className="App">
       <a
         className="btn btn--loginApp-link"
-        href={`${authEndpoint}?response_type=token&client_id=${clientId}&scope=${scopes.join(
-          "%20"
-        )}&redirect_uri=${redirectUri}&state=${state}`}
+        href={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
       >
         Login to Spotify
       </a>
     </div>
   );
 }
+// ${authEndpoint}?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}
+// ${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true
+//GET https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http%3A%2F%2localhost%3A3000%2Fparty&scope=user-read-private%20user-read-email&state=34fFs29kd09

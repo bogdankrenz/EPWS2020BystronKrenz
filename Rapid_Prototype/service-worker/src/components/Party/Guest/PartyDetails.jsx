@@ -1,55 +1,50 @@
 import React, { useState, useEffect } from "react";
-
-var stateKey = "spotify_auth_state";
-
-/**
- * Obtains parameters from the hash of the URL
- * @return Object
- */
-function getHashParams() {
-  var hashParams = {};
-  var e,
-    r = /([^&;=]+)=?([^&;]*)/g,
-    q = window.location.hash.substring(1);
-  while ((e = r.exec(q))) {
-    hashParams[e[1]] = decodeURIComponent(e[2]);
-  }
-  return hashParams;
-}
-
-let params = getHashParams();
-console.log(params);
-
-var access_token = params.access_token,
-  state = params.state,
-  storedState = localStorage.getItem(stateKey);
-
-if (access_token && (state == null || state !== storedState)) {
-  alert("There was an error during the authentication");
-} else {
-  localStorage.removeItem(stateKey);
-  // if (access_token) {
-  //   $.ajax({
-  //     url: "https://api.spotify.com/v1/me",
-  //     headers: {
-  //       Authorization: "Bearer " + access_token,
-  //     },
-  //     success: function (response) {
-  //       console.log(response);
-  //     },
-  //   });
-  // }
-}
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import hash from "../../../hash";
 
 function PartyDetails() {
   const [songs, setSongs] = useState({});
+  const location = useLocation();
+  console.log(location.pathname);
+
+  let _token = hash.access_token;
 
   useEffect(() => {
-    //here comes API call to the server to get the songs
-    //second param is empty array to run this effect on first render only
+    if (!_token) {
+      alert("There was an error during the authentication");
+    } else {
+      axios
+        .put(
+          `https://party-together.herokuapp.com/parties/5ff8288c73949c001795f553/newGuest?token=${_token}`
+        )
+        .then((res) => {
+          setSongs(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
-
-  return <div>Party Details Component</div>;
+  return (
+    <div>
+      <h3>Welcome to Party Together!</h3>
+      <p>Here are some of the songs that we found...</p>
+      {songs.map((song) => {
+        console.log(song);
+        return (
+          <div>
+            <img src={song.images[2].url} alt="album-cover" />
+            <h5 style={{ display: "inline-block", margin: "2px" }}>
+              {song.artist} - {song.title}
+            </h5>
+            <h5 style={{ display: "inline-block", margin: "2px" }}></h5>
+            <h5 style={{ display: "inline-block", margin: "2px" }}>
+              votes: {song.votes}
+            </h5>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default PartyDetails;
