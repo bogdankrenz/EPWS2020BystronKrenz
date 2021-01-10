@@ -7,7 +7,7 @@ export default function Playlist() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://party-together.herokuapp.com/songs`)
+      .get(`https://party-together-server.herokuapp.com/songs`)
       .then((res) => {
         setSongs(res.data);
         setLoading(false);
