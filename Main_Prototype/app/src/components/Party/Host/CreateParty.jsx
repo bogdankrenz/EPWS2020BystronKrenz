@@ -5,8 +5,8 @@ import Playlist from "./Playlist";
 
 export default function CreateParty() {
   return (
-    <div>
-      <h4>Create Party</h4>
+    <div className="login">
+      <h4 style={{ color: "#fff", textAlign: "center" }}>Create Party</h4>
       <input placeholder="name" />
       <Link to="/playlist">
         <Button variant="primary">Submit</Button>
