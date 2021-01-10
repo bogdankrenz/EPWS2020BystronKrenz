@@ -3,10 +3,10 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import hash from "../../hash";
 
-export const authEndpoint = "https://accounts.spotify.com/authorize"; // Replace with your app's client ID, redirect URI and desired scopes
+export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
-const redirectUri = "http://localhost:3000/party";
-const scopes = ["user-top-read"]; // Get the hash of the url
+const redirectUri = "https://party-together.herokuapp.com/party";
+const scopes = ["user-top-read"];
 const state = generateRandomString(16);
 window.location.hash = "";
 
@@ -43,7 +43,7 @@ export default function Home() {
       <div className="login">
         <a
           className="btn btn-success login"
-          href={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
+          href={`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes[0]}&state=34fFs29kd09`}
         >
           Join with Spotify
         </a>
