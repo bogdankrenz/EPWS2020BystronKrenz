@@ -1,4 +1,4 @@
-import { Router } from "express"
+import e, { Router } from "express"
 import Party from "../models/parties.js"
 import Song from "../models/songs.js"
 import addUserTracksToParty from "../functions/spotifyAccess.js"
@@ -19,16 +19,18 @@ router.get("/", async (req, res) => {
 
 //Create new party
 router.post("/", (req, res) => {
-    let partyName = req.query.partyName
-
+    
     const party = new Party({
-        partyName: partyName,
-        admin: 'Carlos',
+        partyName: req.body.partyName,
+        explicitSongsAccepted: req.body.explicitSongsAccepted,
+        justInstrumental: req.body.justInstrumental,
+        preferredEnergy: req.body.preferredEnergy,
+        admin: 'Admin',
     })
 
     party.save((err, newParty) => {
         if (err) {
-            res.status(500).send("Error occurred")
+            res.status(500).send(err.message)
             console.error(err)
         } else {
             res.send(newParty)
