@@ -16,7 +16,7 @@ export default async function addUserTracksToParty(token, party){
     // The number of entities to return. Default: 20. Minimum: 1. Maximum: 50
     const limit = "10"
 
-    const url = `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`
+    const userTracksUrl = `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 
     var header = {
         method: 'GET',
@@ -27,17 +27,17 @@ export default async function addUserTracksToParty(token, party){
 
     var userSongs = []
 
-    const response = await fetch(url, header)
-    const json = await response.json()
+    const userTracksResponse = await fetch(userTracksUrl, header)
+    const userTracksJson = await userTracksResponse.json()
 
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`
+    if (!userTracksResponse.ok) {
+        const message = `An error has occured: ${userTracksResponse.status}`
         console.error(message)
-        console.error(json)
+        console.error(userTracksJson)
         throw new Error(message)
     }
 
-    await json.items.forEach(async (song) => {
+    await userTracksJson.items.forEach(async (song) => {
 
         // Prüfen ob der Künstler bereits in DB gespeichert ist
         const artistID = `${party._id}-${song.artists[0].id}`
@@ -87,9 +87,34 @@ export default async function addUserTracksToParty(token, party){
             images: song.album.images,
             votes: 1,
         })
-        newSong.save((err) => { if (err) { console.error(err)}  })
+        getAudioFeatures(song.id, newSong)
         userSongs.push(newSong)
         return newSong
+    }
+
+    async function getAudioFeatures(spotifyID, newSong){
+        const featureUrl = `https://api.spotify.com/v1/audio-features/${spotifyID}`
+        
+        const featureResponse = await fetch(featureUrl, header)
+        const featureJson = await featureResponse.json()
+
+        if (!featureResponse.ok) {
+            const message = `An error has occured: ${userTracksResponse.status}`
+            console.error(message)
+            console.error(userTracksJson)
+            throw new Error(message)
+        }
+
+        newSong.danceability        = featureJson.danceability
+        newSong.energy              = featureJson.energy
+        newSong.loudness            = featureJson.loudness
+        newSong.speechiness         = featureJson.speechiness
+        newSong.acousticness        = featureJson.acousticness
+        newSong.instrumentalness    = featureJson.instrumentalness
+        newSong.tempo               = featureJson.tempo
+
+        newSong.save((err) => { if (err) { console.error(err)} })
+    
     }
 
     return userSongs

@@ -63,7 +63,7 @@ router.put("/:partyId/newGuest", async (req, res) => {
         const userTracks = await addUserTracksToParty(token, party)
 
         party.save((err) => { 
-            if (err) { 
+            if (err) {
                 console.error(err)
             } else {
                 res.send(userTracks)
