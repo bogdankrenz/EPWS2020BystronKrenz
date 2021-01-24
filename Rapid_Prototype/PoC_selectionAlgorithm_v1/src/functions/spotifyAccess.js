@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import Party from "../models/parties.js"
 import Song from "../models/songs.js"
+import getPartyFit from "../functions/getPartyFit.js"
 
 /**
  * @param {string} token The token to get access to a users spotify account
@@ -11,10 +12,10 @@ export default async function addUserTracksToParty(token, party){
 
     // long_term (calculated from several years of data and including all new data as it becomes available)
     // medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term
-    const timeRange = "short_term"
+    const timeRange = "long_term"
 
     // The number of entities to return. Default: 20. Minimum: 1. Maximum: 50
-    const limit = "10"
+    const limit = "50"
 
     const userTracksUrl = `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 
@@ -56,6 +57,7 @@ export default async function addUserTracksToParty(token, party){
             party.artists.push(artist)
 
         } else {
+            console.log()
             // Wenn Künstler bereits in DB gespeichert -> Prüfen ob Song ebenfalls vorhanden ist
             const songID = `${party._id}-${song.id}`
             const existingSongID = existingArtist.songs.find(existingSongID => existingSongID == songID)
@@ -87,12 +89,12 @@ export default async function addUserTracksToParty(token, party){
             images: song.album.images,
             votes: 1,
         })
-        getAudioFeatures(song.id, newSong)
+        addAudioFeatures(song.id, newSong)
         userSongs.push(newSong)
         return newSong
     }
 
-    async function getAudioFeatures(spotifyID, newSong){
+    async function addAudioFeatures(spotifyID, newSong){
         const featureUrl = `https://api.spotify.com/v1/audio-features/${spotifyID}`
         
         const featureResponse = await fetch(featureUrl, header)
@@ -101,7 +103,7 @@ export default async function addUserTracksToParty(token, party){
         if (!featureResponse.ok) {
             const message = `An error has occured: ${userTracksResponse.status}`
             console.error(message)
-            console.error(userTracksJson)
+            console.error(featureJson)
             throw new Error(message)
         }
 
@@ -112,6 +114,8 @@ export default async function addUserTracksToParty(token, party){
         newSong.acousticness        = featureJson.acousticness
         newSong.instrumentalness    = featureJson.instrumentalness
         newSong.tempo               = featureJson.tempo
+
+        newSong.partyFit = getPartyFit(newSong, party)
 
         newSong.save((err) => { if (err) { console.error(err)} })
     
