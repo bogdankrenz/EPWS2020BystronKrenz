@@ -60,15 +60,14 @@ router.put("/:partyId/newGuest", async (req, res) => {
         party.userCount++
 
         // addUserTracksToParty is called to add the users prefered songs to the partys song list
+        // a list of user tracks is send to the guest to show him that the application is working
         const userTracks = await addUserTracksToParty(token, party)
 
-        party.save((err) => { 
-            if (err) {
-                console.error(err)
-            } else {
-                res.send(userTracks)
-            }  
-        })
+        // addUserTracksToParty is called again asynchronously to add more of users prefered songs 
+        // to the partys song list without making him wait for the result -> timeRange is changed for this call
+        addUserTracksToParty(token, party, "long_term")
+
+        res.send(userTracks)
 
     } catch {
         res.status(404).send(`Party with ID ${req.params.partyId} could not be found`)
