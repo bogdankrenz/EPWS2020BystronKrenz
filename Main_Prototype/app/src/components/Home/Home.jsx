@@ -39,13 +39,20 @@ export default function Home() {
     }
   }, []);
   return (
-    <div className="App">
-      <a
-        className="btn btn--loginApp-link"
-        href={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
-      >
-        Login to Spotify
-      </a>
+    <div>
+      <div className="login">
+        <a
+          className="btn btn-success login"
+          href={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
+        >
+          Join with Spotify
+        </a>
+      </div>
+      <div className="login">
+        <a href="/create" className="btn btn-primary login">
+          Create Party
+        </a>
+      </div>
     </div>
   );
 }
