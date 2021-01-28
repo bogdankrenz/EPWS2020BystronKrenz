@@ -138,7 +138,11 @@ export default async function addUserTracksToParty(token, party, timeRange = "me
         addAudioFeatures(newSongs)
     }
 
-    await party.save((err) => { if (err) { console.error(err)} })
-
-    return userSongs
+    if (timeRange == "medium_term") {
+        return userSongs
+    } else {
+        party.save((err) => { if (err) { console.error(err)} })
+        return
+    }
+ 
 }
