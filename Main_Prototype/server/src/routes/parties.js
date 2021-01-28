@@ -67,7 +67,8 @@ router.put("/:partyId/newGuest", async (req, res) => {
             if (err) { 
                 console.error(err)
             } else {
-                res.send(userTracks)
+                userTracks.sort((a, b) => a.votes - b.votes)
+                res.send(userTracks.slice(0, 10))
 
                 // addUserTracksToParty is called again asynchronously to add more of users prefered songs 
                 // to the partys song list without making him wait for the result -> timeRange is changed for this call
