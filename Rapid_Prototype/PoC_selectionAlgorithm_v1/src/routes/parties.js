@@ -80,10 +80,10 @@ router.put("/:partyId/newGuest", async (req, res) => {
     }
 })
 
-// Get all songs from a specific party 
+// Get recomended songs for the party
 router.get("/:partyId/songs", async (req, res) => {
     try {
-        const songs = await Song.find({partyID : req.params.partyId})
+        const songs = await Song.find({partyID : req.params.partyId, partyFit: {$gt: 70} }).sort( { "votes": -1, "partyFit" : -1 } ).limit(50)
         res.send(songs)
     } catch {
         console.error("Error occured")
