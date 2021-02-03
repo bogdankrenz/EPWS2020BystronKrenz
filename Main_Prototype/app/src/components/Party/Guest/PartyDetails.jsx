@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import hash from "../../../hash";
 import "../../../App.css";
 import { Button } from "react-bootstrap";
+import BACKEND_URL from "../../../constants";
 
 function PartyDetails() {
   const [songs, setSongs] = useState({});
   const [isLoading, setLoading] = useState(true);
-  const location = useLocation();
-  console.log(location.pathname);
+  const match = useRouteMatch();
+  const partyID = match.params.partyID;
+  console.log(match.params.partyID);
 
   let _token = hash.access_token;
 
@@ -18,7 +20,7 @@ function PartyDetails() {
     setLoading(true);
     axios
       .put(
-        `https://party-together.herokuapp.com/parties/5ff8949ba84e900017cde4d8/newGuest?token=${_token}`
+        `https://party-together-server.herokuapp.com/parties/${partyID}/newGuest?token=${_token}`
       )
       .then((res) => {
         setSongs(res.data);
@@ -26,12 +28,11 @@ function PartyDetails() {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(_token);
+
   if (isLoading) {
     return <h3 className="login">Loading...</h3>;
   }
-  console.log(songs);
-  console.log(_token);
+
   return (
     <div className="login">
       <div className="header">
@@ -40,7 +41,6 @@ function PartyDetails() {
       </div>
       <ul className="user-songs">
         {songs.map((song, index) => {
-          console.log(song);
           return (
             <li key={index}>
               <img src={song.images[2].url} alt="album-cover" />

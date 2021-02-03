@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation, useRouteMatch } from "react-router-dom";
+import QRCode from "qrcode.react";
 
 export default function Playlist() {
   const [songs, setSongs] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const match = useRouteMatch();
+  const partyID = match.params.partyID;
+  console.log(partyID);
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://party-together.herokuapp.com/songs`)
+      .get(
+        `https://party-together-server.herokuapp.com/parties/${partyID}/songs`
+      )
       .then((res) => {
         setSongs(res.data);
         setLoading(false);
@@ -17,16 +24,27 @@ export default function Playlist() {
   if (isLoading) {
     return <h3 className="login">Loading...</h3>;
   }
-  console.log(songs);
   return (
     <div className="login">
       <div className="header">
         <h3>Welcome to Party Together!</h3>
-        <p>Here are the songs of your guests!</p>
+        <p>Your Guests can join by scanning this QR Code</p>
       </div>
+      <QRCode
+        bgColor="white"
+        fgColor="black"
+        value={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party/${partyID}&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
+      />
+      <a
+        href={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party/${partyID}&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
+      >
+        test
+      </a>
+      <p className="header">
+        After joining, you will see the list of the Songs below
+      </p>
       <ul className="user-songs">
         {songs.map((song, index) => {
-          console.log(song);
           return (
             <li key={index}>
               <img src={song.images[2].url} alt="album-cover" />
