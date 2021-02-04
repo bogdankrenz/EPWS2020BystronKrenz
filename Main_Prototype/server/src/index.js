@@ -2,6 +2,7 @@
 import express from "express"
 import mongoose from 'mongoose'
 import bodyParser from "body-parser"
+import cors from 'cors'
 
 // internal imports
 import indexRouter from "./routes/index.js"
@@ -10,6 +11,7 @@ import songsRouter from "./routes/songs.js"
 
 const app = express()
 app.use(bodyParser.urlencoded({limit: "3mb", extended: false}))
+app.use(cors())
 
 // setting up the db connection
 mongoose.connect(process.env.DATABASE_URL,  {useNewUrlParser: true,  useUnifiedTopology: true })

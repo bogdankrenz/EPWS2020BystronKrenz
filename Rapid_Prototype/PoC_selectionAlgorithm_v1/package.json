@@ -1,0 +1,39 @@
+{
+  "name": "main_prototype",
+  "version": "1.0.0",
+  "description": "An App that helps to grant that everyone loves your party's music",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -r dotenv/config src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bogdankrenz/EPWS2020BystronKrenz.git"
+  },
+  "keywords": [
+    "music",
+    "spotify",
+    "node",
+    "js"
+  ],
+  "author": "Carlos Bystron, Bogdan Krenz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bogdankrenz/EPWS2020BystronKrenz/issues"
+  },
+  "homepage": "https://github.com/bogdankrenz/EPWS2020BystronKrenz#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
+  }
+}

@@ -7,6 +7,13 @@ const songsSchema = new Schema({
     title: String,
     artist: String,
     explicit: Boolean,
+    danceability: Number,
+    energy: Number,
+    loudness: Number,
+    speechiness: Number,
+    acousticness: Number,
+    instrumentalness: Number,
+    tempo: Number,
     duration_s: Number,
     images: [{
         height: Number,
@@ -14,6 +21,7 @@ const songsSchema = new Schema({
         width: Number
     }],
     votes: Number,
+    partyFit: Number
 })
 
 export default mongoose.model("Songs", songsSchema)

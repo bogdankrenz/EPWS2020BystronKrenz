@@ -18,7 +18,7 @@ function PartyDetails() {
     setLoading(true);
     axios
       .put(
-        `https://party-together.herokuapp.com/parties/5ff8949ba84e900017cde4d8/newGuest?token=${_token}`
+        `https://party-together-server.herokuapp.com/parties/5ff8949ba84e900017cde4d8/newGuest?token=${_token}`
       )
       .then((res) => {
         setSongs(res.data);
