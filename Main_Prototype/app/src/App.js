@@ -19,7 +19,7 @@ function App() {
             <CreateParty setPartyID={setPartyID} />
           </Route>
           <Route path="/party/:partyID" component={PartyDetails}></Route>
-          <Route path="/:partyID" component={Playlist}></Route>
+          <Route path="/:partyID" component={PartyDetails}></Route>
         </Switch>
       </Router>
     </div>
