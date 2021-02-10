@@ -3,7 +3,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
-const redirectUri = "https://party-together.herokuapp.com/party";
+const redirectUri = "http://localhost:3000/party";
 const scopes = ["user-top-read"];
 const state = generateRandomString(16);
 window.location.hash = "";

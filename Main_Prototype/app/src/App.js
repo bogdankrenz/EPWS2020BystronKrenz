@@ -21,6 +21,7 @@ function App() {
           </Route>
           <Route path="/party/:partyID" component={SongsFromSpotify}></Route>
           <Route path="/join/:partyID" component={WelcomeGuest}></Route>
+          <Route path="/party" component={SongsFromSpotify}></Route>
           <Route path="/:partyID" component={Playlist}></Route>
         </Switch>
       </Router>
