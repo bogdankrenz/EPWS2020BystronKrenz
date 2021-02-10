@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import { Link, useRouteMatch } from "react-router-dom";
 import Playlist from "./Playlist";
 import "./style.css";
-import RealTimeHost from "../../realTimeHost";
 
 export default function CreateParty({ setPartyID }) {
   const [slider, setSlider] = useState(5);
@@ -43,8 +42,6 @@ export default function CreateParty({ setPartyID }) {
   console.log(partyName);
   return (
     <div className="login">
-      <RealTimeHost partyID='60227cc4d7ffb9139887ea8e'//= {partyID}
-      />
       <h4 style={{ color: "#fff", textAlign: "center" }}>Create Party</h4>
       <form onSubmit={handleSubmit}>
         <input

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
-const ENDPOINT = "localhost:3333";
+const ENDPOINT = "https://party-together-server.herokuapp.com";
 
 const RealTimeGuest = (params) => {
 

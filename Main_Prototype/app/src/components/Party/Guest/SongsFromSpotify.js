@@ -6,8 +6,7 @@ import hash from "../../../hash";
 import "../../../App.css";
 import { Button } from "react-bootstrap";
 import BACKEND_URL from "../../../constants";
-import RealTimeGuest from "../../realTimeGuest";
-import RealTimeHost from "../../realTimeHost";
+import RealTimeGuest from "./realTimeGuest";
 
 function PartyDetails() {
   const [songs, setSongs] = useState({});

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useRouteMatch } from "react-router-dom";
 import QRCode from "qrcode.react";
+import RealTimeHost from "./realTimeHost";
 
 export default function Playlist() {
   const [songs, setSongs] = useState({});
@@ -42,6 +43,7 @@ export default function Playlist() {
       <p className="header">
         You might want to refresh this page to see the songs.
       </p>
+      <RealTimeHost partyID={partyID}/>
       <ul className="user-songs">
         {songs.map((song, index) => {
           return (
