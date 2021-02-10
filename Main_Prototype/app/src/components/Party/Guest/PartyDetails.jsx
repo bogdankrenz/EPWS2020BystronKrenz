@@ -16,6 +16,8 @@ function PartyDetails() {
 
   let _token = hash.access_token;
 
+  // /parties/partyID -> party details
+
   useEffect(() => {
     setLoading(true);
     axios
