@@ -6,6 +6,8 @@ import hash from "../../../hash";
 import "../../../App.css";
 import { Button } from "react-bootstrap";
 import BACKEND_URL from "../../../constants";
+import RealTimeGuest from "../../realTimeGuest";
+import RealTimeHost from "../../realTimeHost";
 
 function PartyDetails() {
   const [songs, setSongs] = useState({});
@@ -46,12 +48,13 @@ function PartyDetails() {
   }, []);
 
   if (isLoading) {
-    return <h3 className="login">Loading...</h3>;
+    return <h3 className="login">Loadingggg...</h3>;
   }
 
   return (
     <div className="login">
       <div className="header">
+        <RealTimeGuest partyID = {partyID}/>
         <h3>Welcome to Party Together!</h3>
         {contribution ? (
           <p>Here are some of the songs that we found...</p>

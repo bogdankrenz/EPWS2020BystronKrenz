@@ -5,7 +5,7 @@ import hash from "../../hash";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
-const redirectUri = "https://party-together.herokuapp.com/party";
+const redirectUri = "http://localhost:3000/party";
 const scopes = ["user-top-read"];
 const state = generateRandomString(16);
 window.location.hash = "";
@@ -27,7 +27,9 @@ function generateRandomString(length) {
 }
 
 export default function Home() {
+
   const [token, setToken] = useState({});
+
   useEffect(() => {
     //set token
     let _token = hash.access_token;
@@ -38,6 +40,7 @@ export default function Home() {
       });
     }
   }, []);
+
   return (
     <div>
       <div className="login">
@@ -48,6 +51,7 @@ export default function Home() {
     </div>
   );
 }
+
 // ${authEndpoint}?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}
 // ${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true
 //GET https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http%3A%2F%2localhost%3A3000%2Fparty&scope=user-read-private%20user-read-email&state=34fFs29kd09

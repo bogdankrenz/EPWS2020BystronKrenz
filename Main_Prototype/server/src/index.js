@@ -1,13 +1,17 @@
 // external imports
 import express from "express"
 import mongoose from 'mongoose'
+import Song from "./models/songs.js"
 import bodyParser from "body-parser"
 import cors from 'cors'
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 // internal imports
 import indexRouter from "./routes/index.js"
 import partiesRouter from "./routes/parties.js"
 import songsRouter from "./routes/songs.js"
+import { error } from "console"
 
 const app = express()
 app.use(bodyParser.urlencoded({limit: "3mb", extended: false}))
@@ -24,4 +28,47 @@ app.use("/", indexRouter)
 app.use("/parties", partiesRouter)
 app.use("/songs", songsRouter)
 
-app.listen(process.env.PORT || 3000, () => console.log('Listening on port 3000'))
+// socket.io setup for realTime connection with host dashboard
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+    cors: {
+      origin: "http://localhost:3000",
+      credentials: true
+    }
+})
+
+
+io.on("connection", (socket) => {
+
+    socket.on("host", (partyID) => {
+        console.log("New host at Party", partyID, "connected");
+        socket.join(partyID);
+    })
+
+    socket.on("guest", (partyID) => {
+        console.log("New guest at Party", partyID, "connected");
+        getRoomAndEmit(io, partyID)
+    })
+
+    socket.on("disconnect", () => {
+        console.log("Client disconnected");
+    });
+})
+
+const getRoomAndEmit = async (socket, partyID) => {
+
+    const guestCount = 2
+
+    try {
+        const songs = await Song.find({partyID : partyID, partyFit: {$gt: 70} }).sort( { "votes": -1, "partyFit" : -1 } ).limit(50)
+        // Emitting a new message. Will be consumed by the host only
+        socket.to(partyID).emit("dashboardUpdate", songs, guestCount);
+    } catch {
+        console.error("Error occured")
+    }
+
+};
+
+
+httpServer.listen(process.env.PORT || 3333, () => console.log('Listening on port 3333'))
