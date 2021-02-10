@@ -41,14 +41,6 @@ export default function Home() {
   return (
     <div>
       <div className="login">
-        <a
-          className="btn btn-success login"
-          href={`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes[0]}&state=34fFs29kd09`}
-        >
-          Join with Spotify
-        </a>
-      </div>
-      <div className="login">
         <a href="/create" className="btn btn-primary login">
           Create Party
         </a>

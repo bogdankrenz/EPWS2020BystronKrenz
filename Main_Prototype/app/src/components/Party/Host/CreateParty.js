@@ -6,7 +6,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 import Playlist from "./Playlist";
 import "./style.css";
 
-export default function CreateParty() {
+export default function CreateParty({ setPartyID }) {
   const [slider, setSlider] = useState(5);
   const [explicit, setExplicit] = useState(false);
   const [instrumental, setInstrumental] = useState(false);
@@ -61,13 +61,22 @@ export default function CreateParty() {
           />
           <output>{slider}</output>
         </div>
-        <label>Explicit Content?</label>
-        <input type="checkbox" onClick={(e) => setExplicit(!explicit)}></input>
-        <label>Instrumental only?</label>
-        <input
-          type="checkbox"
-          onClick={(e) => setInstrumental(!instrumental)}
-        ></input>
+        <div style={{ display: "block" }}>
+          <input
+            style={{ marginRight: "10px", alignItems: "left" }}
+            type="checkbox"
+            onClick={(e) => setExplicit(!explicit)}
+          ></input>
+          <label>Explicit Content?</label>
+        </div>
+        <div style={{ display: "block" }}>
+          <input
+            style={{ marginRight: "10px" }}
+            type="checkbox"
+            onClick={(e) => setInstrumental(!instrumental)}
+          ></input>
+          <label>Instrumental only?</label>
+        </div>
         <input type="submit" value="Submit"></input>
       </form>
     </div>

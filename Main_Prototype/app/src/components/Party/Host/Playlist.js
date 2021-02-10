@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
-import hash from "../../../hash";
-import "../../../App.css";
-import { Button } from "react-bootstrap";
-import BACKEND_URL from "../../../constants";
+import { useLocation, useRouteMatch } from "react-router-dom";
+import QRCode from "qrcode.react";
 
-function PartyDetails() {
+export default function Playlist() {
   const [songs, setSongs] = useState({});
   const [isLoading, setLoading] = useState(true);
   const match = useRouteMatch();
   const partyID = match.params.partyID;
-  console.log(match.params.partyID);
-
-  let _token = hash.access_token;
-
-  // /parties/partyID -> party details
-
+  console.log(partyID);
   useEffect(() => {
     setLoading(true);
     axios
-      .put(
-        `https://party-together-server.herokuapp.com/parties/${partyID}/newGuest?token=${_token}`
+      .get(
+        `https://party-together-server.herokuapp.com/parties/${partyID}/songs`
       )
       .then((res) => {
         setSongs(res.data);
@@ -30,36 +21,39 @@ function PartyDetails() {
       })
       .catch((err) => console.log(err));
   }, []);
-
   if (isLoading) {
     return <h3 className="login">Loading...</h3>;
   }
-
   return (
     <div className="login">
       <div className="header">
         <h3>Welcome to Party Together!</h3>
-        <p>Here are some of the songs that we found...</p>
+        <p>Your Guests can join by scanning this QR Code</p>
       </div>
+      <QRCode
+        bgColor="white"
+        fgColor="black"
+        value={`https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http://localhost:3000/party/${partyID}&scope=user-read-private%20user-read-email&state=34fFs29kd09&show_dialog=true`}
+      />
+      <a href={`localhost:3000/join/${partyID}`}>test</a>
+      <p className="header">
+        After joining, you will see the list of the Songs below
+      </p>
+      <p className="header">
+        You might want to refresh this page to see the songs.
+      </p>
       <ul className="user-songs">
         {songs.map((song, index) => {
           return (
             <li key={index}>
               <img src={song.images[2].url} alt="album-cover" />
               <h5 style={{ display: "inline-block", margin: "2px" }}>
-                {song.artist} - {song.title}
+                {song.artist} - {song.title} - Votes: {song.votes}
               </h5>
             </li>
           );
         })}
       </ul>
-      <div className="login">
-        <a href="/" className="btn btn-primary login">
-          Great!
-        </a>
-      </div>
     </div>
   );
 }
-
-export default PartyDetails;
