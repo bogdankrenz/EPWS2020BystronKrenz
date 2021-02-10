@@ -33,7 +33,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
     cors: {
-      origin: "https://party-together-server.herokuapp.com",
+      origin: "http://localhost:3000",
       credentials: true
     }
 })
