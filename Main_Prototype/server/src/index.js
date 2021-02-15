@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
 const getRoomAndEmit = async (socket, partyID) => {
 
     try {
-        const party = await Party.find({_id : req.params.partyId})
+        const party = await Party.find({_id : partyID})
         const songs = await Song.find({partyID : partyID, partyFit: {$gt: 70} }).sort( { "votes": -1, "partyFit" : -1 } ).limit(50)
         const guestCount = party.userCount
 
