@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import qs from "qs";
-import { Button } from "react-bootstrap";
+import Button from '@material-ui/core/Button';
 import { Link, useRouteMatch } from "react-router-dom";
 import HostDashboard from "./HostDashboard";
-import "./style.css";
 
 export default function CreateParty({ setPartyID }) {
   const [slider, setSlider] = useState(5);
@@ -50,11 +49,11 @@ export default function CreateParty({ setPartyID }) {
           onChange={(e) => setPartyName(e.target.value)}
         />
         <div className="slideContainer">
-          <label>Energy Level of the Partey (0 lowest, 10 highest)</label>
+          <label>Energy Level of the Partey (1 lowest, 10 highest)</label>
           <input
             value={slider}
             type="range"
-            min="0"
+            min="1"
             max="10"
             className="slider"
             onChange={(e) => setSlider(e.target.value)}
@@ -77,7 +76,9 @@ export default function CreateParty({ setPartyID }) {
           ></input>
           <label>Instrumental only?</label>
         </div>
-        <input type="submit" value="Submit"></input>
+        <Button type="submit" value="Submit" variant="contained" color="primary">
+          Submit
+        </Button>
       </form>
     </div>
   );
