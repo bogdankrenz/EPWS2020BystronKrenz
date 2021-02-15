@@ -4,6 +4,7 @@ import qs from "qs";
 import Button from '@material-ui/core/Button';
 import { Link, useRouteMatch } from "react-router-dom";
 import HostDashboard from "./HostDashboard";
+import CreatePartyForm from "../components/createParty/CreatePartyForm"
 
 export default function CreateParty({ setPartyID }) {
   const [slider, setSlider] = useState(5);
@@ -39,6 +40,8 @@ export default function CreateParty({ setPartyID }) {
   }
 
   console.log(partyName);
+
+  return (<CreatePartyForm partyID={partyID}/>)
   return (
     <div className="login">
       <h4 style={{ color: "#fff", textAlign: "center" }}>Create Party</h4>
