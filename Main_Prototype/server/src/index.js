@@ -2,10 +2,11 @@
 import express from "express"
 import mongoose from 'mongoose'
 import Song from "./models/songs.js"
+import Party from "./models/parties.js"
 import bodyParser from "body-parser"
 import cors from 'cors'
-import { createServer } from "http";
-import { Server } from "socket.io";
+import { createServer } from "http"
+import { Server } from "socket.io"
 
 // internal imports
 import indexRouter from "./routes/index.js"
