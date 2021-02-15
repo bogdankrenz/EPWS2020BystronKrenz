@@ -42,26 +42,28 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
 
     socket.on("host", (partyID) => {
-        console.log("New host at Party", partyID, "connected");
-        socket.join(partyID);
+        console.log("New host at Party", partyID, "connected")
+        socket.join(partyID)
+        getRoomAndEmit(io, partyID)
     })
 
     socket.on("guest", (partyID) => {
-        console.log("New guest at Party", partyID, "connected");
+        console.log("New guest at Party", partyID, "connected")
         getRoomAndEmit(io, partyID)
     })
 
     socket.on("disconnect", () => {
-        console.log("Client disconnected");
+        console.log("Client disconnected")
     });
 })
 
 const getRoomAndEmit = async (socket, partyID) => {
 
-    const guestCount = 2
-
     try {
+        const party = await Party.find({_id : req.params.partyId})
         const songs = await Song.find({partyID : partyID, partyFit: {$gt: 70} }).sort( { "votes": -1, "partyFit" : -1 } ).limit(50)
+        const guestCount = party.userCount
+
         // Emitting a new message. Will be consumed by the host only
         socket.to(partyID).emit("dashboardUpdate", songs, guestCount);
     } catch {
