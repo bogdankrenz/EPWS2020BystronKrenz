@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import hash from "../../../hash";
+import hash from "../../../helpers/hash";
 import "../../../App.css";
 import { Button } from "react-bootstrap";
-import BACKEND_URL from "../../../constants";
+import BACKEND_URL from "../../../helpers/constants";
 import RealTimeGuest from "./realTimeGuest";
 
 function PartyDetails() {

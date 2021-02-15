@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useRouteMatch } from "react-router-dom";
 import QRCode from "qrcode.react";
-import RealTimeHost from "./realTimeHost";
+import RealTimeHost from "../components/Host/realTimeHost";
 
 export default function Playlist() {
   const [songs, setSongs] = useState({});

@@ -1,10 +1,10 @@
 import { Navbar, Nav } from "react-bootstrap";
 import "./App.css";
-import hash from "./hash";
-import Home from "./components/Home/Home.js";
-import CreateParty from "./components/Party/Host/CreateParty.js";
+import hash from "./helpers/hash";
+import Home from "./pages/Home.js";
+import CreateParty from "./pages/CreateParty.js";
 import SongsFromSpotify from "./components/Party/Guest/SongsFromSpotify.js";
-import Playlist from "./components/Party/Host/Playlist.js";
+import Playlist from "./pages/Playlist.js";
 import WelcomeGuest from "./components/Party/Guest/WelcomeGuest";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { useState } from "react";

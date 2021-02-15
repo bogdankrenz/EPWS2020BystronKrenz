@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import hash from "../../hash";
+import hash from "../helpers/hash";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
