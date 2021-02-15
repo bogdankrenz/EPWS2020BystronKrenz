@@ -3,7 +3,7 @@ import axios from "axios";
 import qs from "qs";
 import { Button } from "react-bootstrap";
 import { Link, useRouteMatch } from "react-router-dom";
-import Playlist from "./Playlist";
+import HostDashboard from "./HostDashboard";
 import "./style.css";
 
 export default function CreateParty({ setPartyID }) {

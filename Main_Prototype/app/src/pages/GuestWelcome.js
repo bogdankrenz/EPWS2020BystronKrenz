@@ -9,7 +9,7 @@ const state = generateRandomString(16);
 window.location.hash = "";
 
 /**
- * Generates a random string containing numbers and letters
+ * Generates a random string containing numbers and letters to enhance security while requesting the spotify API
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
@@ -24,18 +24,13 @@ function generateRandomString(length) {
   return text;
 }
 
-export default function WelcomeGuest() {
+export default function GuestWelcome() {
+
+  // partyID is taken from query param and saved in the local storage
   const match = useRouteMatch();
   const partyID = match.params.partyID;
-  console.log(partyID);
   localStorage.setItem("partyID", partyID);
-  // Welcome Guest! :)
-  // This is a Spotify Powered App for getting everyone's music wish come true!
-  // You can decide if you want to contribute Songs for the Host by signing in with your Spotify Account below.
-  // If not, just join and see what others have been contributing so far!
-
-  // JOIN WITH SPOTIFY TO VOTE
-  // JUST SHOW THE SONGS ALREADY
+ 
   return (
     <div className="login-guest">
       <div className="header">
@@ -56,12 +51,12 @@ export default function WelcomeGuest() {
       <div className="login">
         <a
           className="btn btn-success login"
-          href={`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes[0]}&state=34fFs29kd09`}
+          href={`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes[0]}&state=${state}`}
         >
           JOIN WITH SPOTIFY TO VOTE
         </a>
         <Link className="btn btn-primary login" to={`/party/${partyID}`}>
-          JUST SHOW THE SONGS ALREADY
+          I DON'T HAVE SPOTIFY
         </Link>
       </div>
     </div>

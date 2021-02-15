@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
-import hash from "../../../helpers/hash";
-import "../../../App.css";
-import { Button } from "react-bootstrap";
-import BACKEND_URL from "../../../helpers/constants";
-import RealTimeGuest from "./realTimeGuest";
+import hash from "../helpers/hash";
+import BACKEND_URL from "../helpers/constants";
+import RealTimeGuest from "../components/realTimeGuest";
 
-function PartyDetails() {
+export default function GuestRegistered() {
   const [songs, setSongs] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [contribution, setContribution] = useState(false);
 
   const partyID = localStorage.getItem("partyID");
-
-  let _token = hash.access_token;
-
-  // /parties/partyID -> party details
+  const _token = hash.access_token;
 
   useEffect(() => {
     setLoading(true);
@@ -76,5 +69,3 @@ function PartyDetails() {
     </div>
   );
 }
-
-export default PartyDetails;

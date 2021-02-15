@@ -11,12 +11,12 @@ const RealTimeHost = (params) => {
       const socket = io(ENDPOINT);
 
       socket.on("connect", () => {
+        console.log("HALLLLLLLLOOOOOOOLOOOOLOOLLOOOO")
         socket.emit("host", params.partyID)
       })
 
       socket.on("dashboardUpdate", (songs, guestCount) => {
-          console.log(songs)
-          setResponse(songs);
+          setResponse(songs)
       });
 
     }, []);

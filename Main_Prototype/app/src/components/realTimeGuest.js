@@ -22,9 +22,7 @@ const RealTimeGuest = (params) => {
     }, []);
   
     return (
-      <h1 style={{ color: "#fff", textAlign: "center" }}>
-        Guests: {response}
-      </h1>
+      <br />
     );
 
 }
