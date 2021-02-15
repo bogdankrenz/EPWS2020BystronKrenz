@@ -65,6 +65,8 @@ const getRoomAndEmit = async (socket, partyID) => {
         const songs = await Song.find({partyID : partyID, partyFit: {$gt: 70} }).sort( { "votes": -1, "partyFit" : -1 } ).limit(50)
         const guestCount = party.userCount
 
+        console.log(party)
+
         // Emitting a new message. Will be consumed by the host only
         socket.to(partyID).emit("dashboardUpdate", songs, guestCount);
     } catch {
