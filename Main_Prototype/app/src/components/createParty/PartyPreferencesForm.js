@@ -55,8 +55,7 @@ export default function AddressForm(params) {
       .then((res) => {
         let partyID = res.data._id;
         console.log(res.data._id);
-        params.myCallback(partyID)
-        //window.location = `/${partyID}`;
+        params.myCallback(partyID, partyName)
       })
       .catch((err) => console.error(err));
   }
@@ -93,7 +92,7 @@ export default function AddressForm(params) {
             onChange={(e) => setSlider(e.target.value)}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item>
           <FormControlLabel
             control={<Checkbox defaultChecked color="secondary" name="saveAddress" value="yes" />}
             label="Accept explicit songs"

@@ -1,55 +1,81 @@
-import React, { useState, useEffect } from "react";
-import hash from "../helpers/hash";
+import React from "react";
 
-export const authEndpoint = "https://accounts.spotify.com/authorize";
-const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
-const redirectUri = "http://localhost:3000/party";
-const scopes = ["user-top-read"];
-const state = generateRandomString(16);
-window.location.hash = "";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
-/**
- * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
- */
-function generateRandomString(length) {
-  var text = "";
-  var possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-}
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    position: "relative",
+  },
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+}));
 
 export default function Home() {
-
-  const [token, setToken] = useState({});
-
-  useEffect(() => {
-    //set token
-    let _token = hash.access_token;
-    if (_token) {
-      //set token
-      setToken({
-        token: _token,
-      });
-    }
-  }, []);
+  const classes = useStyles();
 
   return (
-    <div>
-      <div className="login">
-        <a href="/create" className="btn btn-primary login">
-          Create Party
-        </a>
-      </div>
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <AppBar position="absolute" color="default" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            Party Together
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={3} align="center" direction="column">
+            <Grid item>
+              <Typography component="h1" variant="h4">
+                Create Party
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography gutterBottom>
+                Create a Party with PartyTogether to see the best fitting songs
+                from all your friends. Listening to music together was never
+                that easy!
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                align="center"
+                color="primary"
+                href="/create"
+              >
+                Create Party
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+      </main>
+    </React.Fragment>
   );
 }
-
-// ${authEndpoint}?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}
-// ${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true
-//GET https://accounts.spotify.com/authorize?client_id=0be1f8b94d5e48599b0b2121080e8b67&response_type=token&redirect_uri=http%3A%2F%2localhost%3A3000%2Fparty&scope=user-read-private%20user-read-email&state=34fFs29kd09
