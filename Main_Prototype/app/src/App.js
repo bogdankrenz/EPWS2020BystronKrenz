@@ -14,15 +14,14 @@ import backgroundImage from "./media/background.jpg";
 const useStyles = makeStyles((theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
-    "background-size": "contain",
+    "background-size": "cover",
     "background-position": "center",
     height: "100vh",
     repeat: "no-repeat",
-  }
+  },
 }));
 
 function App() {
-
   const [partyID, setPartyID] = useState("");
   const classes = useStyles();
 

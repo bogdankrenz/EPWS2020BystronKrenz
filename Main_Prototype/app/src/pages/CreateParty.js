@@ -14,7 +14,7 @@ import AddressForm from "../components/createParty/PartyPreferencesForm";
 import ConnectSpotifyForm from "../components/createParty/ConnectSpotifyForm";
 import SharePartyForm from "../components/createParty/SharePartyForm";
 
-function Copyright() {
+export function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
