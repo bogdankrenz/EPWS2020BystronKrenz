@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { FRONTEND_URL } from "../../helpers/constants"
+import { FRONTEND_URL } from "../../helpers/constants";
 
 import {
   EmailShareButton,
@@ -21,13 +21,21 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(2),
   },
+  socials: {
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  social: {
+    marginLeft: "20px",
+    marginRight: "20px",
+  },
 }));
 
 export default function SharePartyForm(params) {
   const classes = useStyles();
 
-  const partyURL = `${FRONTEND_URL}/join/${params.partyID}`
-  const subject = `Join ${params.partyName} on PartyTogether to make the music yours!`
+  const partyURL = `${FRONTEND_URL}/join/${params.partyID}`;
+  const subject = `Join ${params.partyName} on PartyTogether to make the music yours!`;
 
   return (
     <React.Fragment>
@@ -41,18 +49,18 @@ export default function SharePartyForm(params) {
             your party! Share the Link so they can join.
           </Typography>
         </Grid>
-        <Grid item container xs={12} sm={6}>
-        <WhatsappShareButton
+        <div className={classes.socials}>
+          <WhatsappShareButton
             title={subject}
             url={partyURL}
-            className="ShareButton"
+            className={"ShareButton " + classes.social}
           >
             <WhatsappIcon size={32} round />
           </WhatsappShareButton>
           <TelegramShareButton
             title={subject}
             url={partyURL}
-            className="ShareButton"
+            className={"ShareButton " + classes.social}
           >
             <TelegramIcon size={32} round />
           </TelegramShareButton>
@@ -60,14 +68,14 @@ export default function SharePartyForm(params) {
             title={subject}
             url={partyURL}
             via={"PartyTogether"}
-            className="ShareButton"
+            className={"ShareButton " + classes.social}
           >
             <TwitterIcon size={32} round />
           </TwitterShareButton>
           <FacebookShareButton
             quote={subject}
             url={partyURL}
-            className="ShareButton"
+            className={"ShareButton " + classes.social}
           >
             <FacebookIcon size={32} round />
           </FacebookShareButton>
@@ -75,12 +83,11 @@ export default function SharePartyForm(params) {
             subject={subject}
             body={`Join on PartyTogether and connect to your Spotify to hear your music at ${params.partyName}`}
             url={partyURL}
-            className="ShareButton"
+            className={"ShareButton " + classes.social}
           >
             <EmailIcon size={32} round />
           </EmailShareButton>
-          <Grid container></Grid>
-        </Grid>
+        </div>
       </Grid>
     </React.Fragment>
   );
