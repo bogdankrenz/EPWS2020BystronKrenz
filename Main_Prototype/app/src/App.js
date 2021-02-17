@@ -14,10 +14,23 @@ import backgroundImage from "./media/background.jpg";
 const useStyles = makeStyles((theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
-    "background-size": "cover",
-    "background-position": "center",
+    position: "relative",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
     height: "100vh",
-    repeat: "no-repeat",
+    [theme.breakpoints.down(600 + theme.spacing(2) * 2)]: {
+      height: "100vh",
+      backgroundImage: `url(${backgroundImage})`,
+      position: "relative",
+      backgroundSize: "contain",
+      backgroundPosition: "center",
+    },
+  },
+  shadder: {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    position: "absolute",
+    width: "100%",
+    height: "100%",
   },
 }));
 
@@ -27,21 +40,23 @@ function App() {
 
   return (
     <div className={classes.background}>
-      <React.Fragment>
-        <CssBaseline />
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/create">
-              <CreateParty setPartyID={setPartyID} />
-            </Route>
-            <Route path="/party/:partyID" component={GuestRegistered}></Route>
-            <Route path="/join/:partyID" component={GuestWelcome}></Route>
-            <Route path="/party" component={GuestRegistered}></Route>
-            <Route path="/:partyID" component={HostDashboard}></Route>
-          </Switch>
-        </Router>
-      </React.Fragment>
+      <div className={classes.shadder}>
+        <React.Fragment>
+          <CssBaseline />
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home}></Route>
+              <Route path="/create">
+                <CreateParty setPartyID={setPartyID} />
+              </Route>
+              <Route path="/party/:partyID" component={GuestRegistered}></Route>
+              <Route path="/join/:partyID" component={GuestWelcome}></Route>
+              <Route path="/party" component={GuestRegistered}></Route>
+              <Route path="/:partyID" component={HostDashboard}></Route>
+            </Switch>
+          </Router>
+        </React.Fragment>
+      </div>
     </div>
   );
 }
