@@ -23,4 +23,21 @@ router.get("/:partyId", async (req, res) => {
     }
 })
 
+// Vote songs up
+router.put("/voteUp", async (req, res) => {
+    try {
+        
+        req.body.songs.forEach( async (song, index) => {
+            const existingSong = await Song.findById(song)
+            existingSong.votes++
+            existingSong.save((err) => {if (err) {console.error(err)}})
+        });
+
+    } catch {
+        res.status(404).send(`Songs could not be found`)
+    }
+
+    res.status(204).send()
+})
+
 export default router

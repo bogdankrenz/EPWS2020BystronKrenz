@@ -16,6 +16,7 @@ import { error } from "console"
 
 const app = express()
 app.use(bodyParser.urlencoded({limit: "3mb", extended: false}))
+app.use(bodyParser.json())
 app.use(cors())
 
 // setting up the db connection
