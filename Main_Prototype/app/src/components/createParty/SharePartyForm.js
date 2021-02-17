@@ -24,10 +24,14 @@ const useStyles = makeStyles((theme) => ({
   socials: {
     marginRight: "auto",
     marginLeft: "auto",
+    marginTop: "20px",
   },
   social: {
     marginLeft: "20px",
     marginRight: "20px",
+  },
+  heading: {
+    textAlign: "center",
   },
 }));
 
@@ -39,7 +43,7 @@ export default function SharePartyForm(params) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom className={classes.heading}>
         Share the party with your friends
       </Typography>
       <Grid container spacing={2}>
