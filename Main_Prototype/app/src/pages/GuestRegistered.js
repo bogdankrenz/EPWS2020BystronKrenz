@@ -17,7 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-import io from 'socket.io-client'
+import io from "socket.io-client";
 const ENDPOINT = "https://party-together-server.herokuapp.com";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   center: {
     textAlign: "center",
   },
+  list_item: {
+    justifyContent: "flex-start",
+  },
 }));
 
 export default function GuestRegistered() {
@@ -79,14 +82,12 @@ export default function GuestRegistered() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     var selectedSongs = [];
-
+    setContribution(!contribution);
     checked.forEach((song) => {
       selectedSongs.push(song._id);
     });
-    console.log(selectedSongs)
-    console.log({ songs: selectedSongs });
 
     const socket = io(ENDPOINT);
 
@@ -95,9 +96,9 @@ export default function GuestRegistered() {
       url: "https://party-together-server.herokuapp.com/songs/voteUp",
       data: { songs: selectedSongs },
     })
-      .then( 
+      .then(
         socket.on("connect", () => {
-          socket.emit("guest", partyID)
+          socket.emit("guest", partyID);
         })
       )
       .catch((err) => console.error(err));
@@ -106,7 +107,6 @@ export default function GuestRegistered() {
   useEffect(() => {
     setLoading(true);
     if (_token) {
-      setContribution(true);
       axios
         .put(
           `https://party-together-server.herokuapp.com/parties/${partyID}/newGuest?token=${_token}`
@@ -117,7 +117,6 @@ export default function GuestRegistered() {
         })
         .catch((err) => console.log(err));
     } else {
-      setContribution(false);
       axios
         .get(
           `https://party-together-server.herokuapp.com/parties/${partyID}/songs`
@@ -166,6 +165,7 @@ export default function GuestRegistered() {
                       const labelId = `checkbox-list-secondary-label-${song}`;
                       return (
                         <ListItem
+                          className={classes.list_item}
                           key={song._id}
                           button
                           onClick={handleToggle(song)}
@@ -188,12 +188,7 @@ export default function GuestRegistered() {
                           </div>
                           <ListItemSecondaryAction>
                             {/*  */}
-                            {_token ? (
-                              <ListItemText
-                                id={labelId}
-                                primary={`${song.votes} Votes`}
-                              />
-                            ) : (
+                            {!_token && contribution ? null : (
                               <>
                                 <Checkbox
                                   edge="end"
@@ -209,14 +204,37 @@ export default function GuestRegistered() {
                     })}
                   </List>
                   <Grid item>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      align="center"
-                      color="primary"
-                    >
-                      Confirm Votes
-                    </Button>
+                    {/* {_token ? (
+                      ""
+                    ) : contribution ? (
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        align="center"
+                        color="primary"
+                      >
+                        Confirm Votes
+                      </Button>
+                    ) : (
+                      <p variant="contained" align="center" color="secondary">
+                        Confirmed!
+                      </p>
+                    )} */}
+
+                    {!_token && !contribution ? (
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        align="center"
+                        color="primary"
+                      >
+                        Confirm Votes
+                      </Button>
+                    ) : (
+                      <p variant="contained" align="center" color="secondary">
+                        Confirmed!
+                      </p>
+                    )}
                   </Grid>
                 </Grid>
               </form>
