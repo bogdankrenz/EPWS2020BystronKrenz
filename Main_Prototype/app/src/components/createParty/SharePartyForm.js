@@ -36,7 +36,14 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: "center",
   },
-  copy: {},
+  qr: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  copy: {
+    marginTop: "-22px",
+  },
 }));
 
 export default function SharePartyForm(params) {
@@ -59,6 +66,10 @@ export default function SharePartyForm(params) {
       <Typography variant="h6" gutterBottom className={classes.heading}>
         Share the party with your friends
       </Typography>
+      <div className={classes.qr}>
+        <QRCode value={partyURL} size={"200"} />
+      </div>
+
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.title}>
           <Typography gutterBottom>
