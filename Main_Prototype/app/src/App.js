@@ -14,17 +14,10 @@ import backgroundImage from "./media/background.jpg";
 const useStyles = makeStyles((theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
-    position: "relative",
-    backgroundSize: "contain",
-    backgroundPosition: "center",
     height: "100vh",
-    [theme.breakpoints.down(600 + theme.spacing(2) * 2)]: {
-      height: "100vh",
-      backgroundImage: `url(${backgroundImage})`,
-      position: "relative",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-    },
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
   },
   shadder: {
     backgroundColor: "rgba(0, 0, 0, 0.1)",

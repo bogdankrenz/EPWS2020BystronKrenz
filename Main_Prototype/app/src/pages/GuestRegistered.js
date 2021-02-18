@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import hash from "../helpers/hash";
 import BACKEND_URL from "../helpers/constants";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import RealTimeGuest from "../components/realTimeGuest";
 
 import Typography from "@material-ui/core/Typography";
@@ -13,37 +13,47 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import { Box } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+
+import io from 'socket.io-client'
+const ENDPOINT = "https://party-together-server.herokuapp.com";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    color: "#fff",
-    textAlign: "center",
-  },
-  info: {
-    color: "#1DB954",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    [theme.breakpoints.down(600 + theme.spacing(3) * 2)]: {
-      textAlign: "center",
-      maxWidth: "350px",
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
       marginLeft: "auto",
       marginRight: "auto",
     },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+  center: {
+    textAlign: "center",
   },
 }));
 
 export default function GuestRegistered() {
   const classes = useStyles();
-  const theme = useTheme();
 
   const [songs, setSongs] = useState({});
   const [isLoading, setLoading] = useState(true);
@@ -52,19 +62,45 @@ export default function GuestRegistered() {
   const partyID = localStorage.getItem("partyID");
   const _token = hash.access_token;
 
-  const [checked, setChecked] = React.useState([1]);
+  const [checked, setChecked] = React.useState([]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const handleToggle = (song) => () => {
+    const currentIndex = checked.indexOf(song);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(song);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
     setChecked(newChecked);
+    console.log(newChecked);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    var selectedSongs = [];
+
+    checked.forEach((song) => {
+      selectedSongs.push(song._id);
+    });
+    console.log(selectedSongs)
+    console.log({ songs: selectedSongs });
+
+    const socket = io(ENDPOINT);
+
+    axios({
+      method: "put",
+      url: "https://party-together-server.herokuapp.com/songs/voteUp",
+      data: { songs: selectedSongs },
+    })
+      .then( 
+        socket.on("connect", () => {
+          socket.emit("guest", partyID)
+        })
+      )
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -97,60 +133,97 @@ export default function GuestRegistered() {
   if (isLoading) {
     return <h3 className="login">Loadingggg...</h3>;
   }
-  console.log(songs);
+
   return (
-    <div className="login">
-      <div className="header">
-        <RealTimeGuest partyID={partyID} />
-        <Typography variant="h4" className={classes.title}>
-          Welcome to Party Together!
-        </Typography>
-        {contribution ? (
-          <Typography variant="h6" className={classes.info}>
-            Here are some of the songs that we found! We already voted and added
-            the songs for you!
-          </Typography>
-        ) : (
-          <Typography variant="h6" className={classes.info}>
-            Here are some of the songs that are in the playlist! Check songs
-            that you would like to listen and confirm!
-          </Typography>
-        )}
-      </div>
-      <List dense className={classes.root}>
-        {songs.map((value) => {
-          const labelId = `checkbox-list-secondary-label-${value}`;
-          return (
-            <ListItem key={value} button>
-              <ListItemAvatar>
-                <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`${value.images[2].url}`}
-                />
-              </ListItemAvatar>
-              <div style={{ display: "block" }}>
-                <ListItemText id={labelId} primary={`${value.artist}`} />
-                <ListItemText id={labelId} primary={`${value.title}`} />
-              </div>
-              <ListItemSecondaryAction>
-                {/*  */}
-                {_token ? (
-                  <ListItemText id={labelId} primary={`${value.votes} Votes`} />
+    <div className={classes.root}>
+      <main className={classes.layout}>
+        <Grid container spacing={3}>
+          <Paper className={classes.paper}>
+            <Grid container spacing={3} align="center" direction="column">
+              <RealTimeGuest partyID={partyID} />
+              <Grid item>
+                <Typography variant="h4" className={classes.center}>
+                  Welcome to Party Together!
+                </Typography>
+              </Grid>
+              <Grid item>
+                {contribution ? (
+                  <Typography gutterBottom className={classes.center}>
+                    Here are some of the songs that we found! We already voted
+                    and added the songs for you!
+                  </Typography>
                 ) : (
-                  <>
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  </>
+                  <Typography gutterBottom className={classes.center}>
+                    Here are some of the songs that are in the playlist. Check
+                    songs that you would like to listen and confirm!
+                  </Typography>
                 )}
-              </ListItemSecondaryAction>
-            </ListItem>
-          );
-        })}
-      </List>
+              </Grid>
+              <form className={classes.container} onSubmit={handleSubmit}>
+                <Grid item>
+                  <List dense className={classes.list}>
+                    {songs.slice(0, 30).map((song) => {
+                      const labelId = `checkbox-list-secondary-label-${song}`;
+                      return (
+                        <ListItem
+                          key={song._id}
+                          button
+                          onClick={handleToggle(song)}
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              alt={`Avatar n°${song + 1}`}
+                              src={`${song.images[2].url}`}
+                            />
+                          </ListItemAvatar>
+                          <div style={{ display: "block" }}>
+                            <ListItemText
+                              id={labelId}
+                              primary={`${song.artist}`}
+                            />
+                            <ListItemText
+                              id={labelId}
+                              primary={`${song.title}`}
+                            />
+                          </div>
+                          <ListItemSecondaryAction>
+                            {/*  */}
+                            {_token ? (
+                              <ListItemText
+                                id={labelId}
+                                primary={`${song.votes} Votes`}
+                              />
+                            ) : (
+                              <>
+                                <Checkbox
+                                  edge="end"
+                                  onChange={handleToggle(song)}
+                                  checked={checked.indexOf(song) !== -1}
+                                  inputProps={{ "aria-labelledby": labelId }}
+                                />
+                              </>
+                            )}
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                  <Grid item>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      align="center"
+                      color="primary"
+                    >
+                      Confirm Votes
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Paper>
+        </Grid>
+      </main>
     </div>
   );
 }
