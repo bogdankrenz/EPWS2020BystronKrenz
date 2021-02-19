@@ -7,8 +7,11 @@ const RealTimeGuest = (params) => {
     useEffect(() => {
       const socket = io(ENDPOINT);
 
+      const vote = "123456789"
+
       socket.on("connect", () => {
         socket.emit("guest", params.partyID)
+        socket.emit("satisfactionVote", vote);
       })
 
     }, []);

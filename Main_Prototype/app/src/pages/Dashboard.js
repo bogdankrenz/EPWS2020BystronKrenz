@@ -131,6 +131,10 @@ export default function Dashboard() {
       socket.emit("host", partyID)
     })
 
+    socket.on("satisfactionVote", (vote) => {
+      console.log(vote)
+    });
+
     socket.on("dashboardUpdate", (songs, guestCount) => {
       setSongs(songs)
       setGuestCount(guestCount)

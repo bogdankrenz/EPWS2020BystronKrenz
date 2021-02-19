@@ -54,12 +54,25 @@ io.on("connection", (socket) => {
         getRoomAndEmit(io, partyID)
     })
 
+    socket.on("satisfactionVote", (partyID, vote) => {
+        getRoomAndEmit(io, partyID, vote)
+    })
+
     socket.on("disconnect", () => {
         console.log("Client disconnected")
     });
 })
 
-const getRoomAndEmit = async (socket, partyID) => {
+const getRoomAndEmit = async (socket, partyID, vote) => {
+
+    if (vote) {
+        try {
+            // Emitting a new message. Will be consumed by the host only
+            socket.to(partyID).emit("satisfactionVote", vote)
+        } catch {
+            console.error("Error occured")
+        }
+    }
 
     try {
         const party = await Party.find({_id : partyID})
