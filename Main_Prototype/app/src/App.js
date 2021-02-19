@@ -8,7 +8,7 @@ import Home from "./pages/Home.js";
 import CreateParty from "./pages/CreateParty.js";
 import GuestRegistered from "./pages/GuestRegistered.js";
 import GuestWelcome from "./pages/GuestWelcome";
-import HostDashboard from "./pages/HostDashboard.js";
+import HostDashboard from "./pages/Dashboard.js";
 import backgroundImage from "./media/background.jpg";
 
 const useStyles = makeStyles((theme) => ({

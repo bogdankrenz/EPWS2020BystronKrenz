@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,10 +17,10 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import SatisfactionChart from './SatisfactionChart';
-import GuestCount from './GuestCount';
-import Playlist from './Playlist';
+import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
+import SatisfactionChart from '../components/dashboard/SatisfactionChart';
+import GuestCount from '../components/dashboard/GuestCount';
+import Playlist from '../components/dashboard/Playlist';
 
 import io from 'socket.io-client'
 const ENDPOINT = "https://party-together-server.herokuapp.com";
@@ -105,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard(params) {
+export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -119,11 +120,15 @@ export default function Dashboard(params) {
   const [songs, setSongs] = useState("");
   const [guestCount, setGuestCount] = useState("");
 
+  // partyID is taken from query param and saved in the local storage
+  const match = useRouteMatch();
+  const partyID = match.params.partyID;
+
   useEffect(() => {
     const socket = io(ENDPOINT);
 
     socket.on("connect", () => {
-      socket.emit("host", params.partyID)
+      socket.emit("host", partyID)
     })
 
     socket.on("dashboardUpdate", (songs, guestCount) => {
@@ -139,7 +144,7 @@ export default function Dashboard(params) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="absolute" color="default" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -153,11 +158,6 @@ export default function Dashboard(params) {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Party Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer

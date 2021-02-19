@@ -16,6 +16,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import io from "socket.io-client";
 const ENDPOINT = "https://party-together-server.herokuapp.com";
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   layout: {
-    width: "auto",
+    width: "100%",
+    content: "center",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -37,15 +39,23 @@ const useStyles = makeStyles((theme) => ({
       marginRight: "auto",
     },
   },
+  container: {
+    width: "100%",
+  },
   paper: {
+    width: "100%",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
     },
+  },
+  submit: {
+    marginBottom: "15px",
+    marginTop: "15px",
   },
   center: {
     textAlign: "center",
@@ -129,14 +139,15 @@ export default function GuestRegistered() {
     }
   }, []);
 
-  if (isLoading) {
-    return <h3 className="login">Loadingggg...</h3>;
-  }
-
   return (
     <div className={classes.root}>
       <main className={classes.layout}>
-        <Grid container spacing={3}>
+        <Grid
+          container
+          align="center"
+          direction="column"
+          className={classes.container}
+        >
           <Paper className={classes.paper}>
             <Grid container spacing={3} align="center" direction="column">
               <RealTimeGuest partyID={partyID} />
@@ -145,99 +156,85 @@ export default function GuestRegistered() {
                   Welcome to Party Together!
                 </Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={11}>
                 {contribution ? (
                   <Typography gutterBottom className={classes.center}>
-                    Here are some of the songs that we found! We already voted
-                    and added the songs for you!
+                    Here are some of the songs that we found. <br />
+                    We already voted and added the songs for you!
                   </Typography>
                 ) : (
                   <Typography gutterBottom className={classes.center}>
-                    Here are some of the songs that are in the playlist. Check
-                    songs that you would like to listen and confirm!
+                    Here are some of the songs that are in the playlist. <br />
+                    Check songs that you would like to listen and confirm!
                   </Typography>
                 )}
               </Grid>
-              <form className={classes.container} onSubmit={handleSubmit}>
-                <Grid item>
-                  <List dense className={classes.list}>
-                    {songs.slice(0, 30).map((song) => {
-                      const labelId = `checkbox-list-secondary-label-${song}`;
-                      return (
-                        <ListItem
-                          className={classes.list_item}
-                          key={song._id}
-                          button
-                          onClick={handleToggle(song)}
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                <form className={classes.container} onSubmit={handleSubmit}>
+                  <Grid item xs={8}>
+                    <List dense className={classes.list}>
+                      {songs.slice(0, 30).map((song) => {
+                        const labelId = `checkbox-list-secondary-label-${song}`;
+                        return (
+                          <ListItem
+                            className={classes.list_item}
+                            key={song._id}
+                            button
+                            onClick={handleToggle(song)}
+                          >
+                            <ListItemAvatar>
+                              <Avatar
+                                alt={`Avatar n°${song + 1}`}
+                                src={`${song.images[2].url}`}
+                              />
+                            </ListItemAvatar>
+                            <div style={{ display: "block" }}>
+                              <ListItemText
+                                id={labelId}
+                                primary={`${song.artist}`}
+                              />
+                              <ListItemText
+                                id={labelId}
+                                primary={`${song.title}`}
+                              />
+                            </div>
+                            <ListItemSecondaryAction>
+                              {_token || contribution ? null : (
+                                <>
+                                  <Checkbox
+                                    edge="end"
+                                    onChange={handleToggle(song)}
+                                    checked={checked.indexOf(song) !== -1}
+                                    inputProps={{ "aria-labelledby": labelId }}
+                                  />
+                                </>
+                              )}
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                    <Grid item>
+                      {!_token && !contribution ? (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                          className={classes.submit}
                         >
-                          <ListItemAvatar>
-                            <Avatar
-                              alt={`Avatar n°${song + 1}`}
-                              src={`${song.images[2].url}`}
-                            />
-                          </ListItemAvatar>
-                          <div style={{ display: "block" }}>
-                            <ListItemText
-                              id={labelId}
-                              primary={`${song.artist}`}
-                            />
-                            <ListItemText
-                              id={labelId}
-                              primary={`${song.title}`}
-                            />
-                          </div>
-                          <ListItemSecondaryAction>
-                            {/*  */}
-                            {!_token && contribution ? null : (
-                              <>
-                                <Checkbox
-                                  edge="end"
-                                  onChange={handleToggle(song)}
-                                  checked={checked.indexOf(song) !== -1}
-                                  inputProps={{ "aria-labelledby": labelId }}
-                                />
-                              </>
-                            )}
-                          </ListItemSecondaryAction>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                  <Grid item>
-                    {/* {_token ? (
-                      ""
-                    ) : contribution ? (
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        align="center"
-                        color="primary"
-                      >
-                        Confirm Votes
-                      </Button>
-                    ) : (
-                      <p variant="contained" align="center" color="secondary">
-                        Confirmed!
-                      </p>
-                    )} */}
-
-                    {!_token && !contribution ? (
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        align="center"
-                        color="primary"
-                      >
-                        Confirm Votes
-                      </Button>
-                    ) : (
-                      <p variant="contained" align="center" color="secondary">
-                        Confirmed!
-                      </p>
-                    )}
+                          Confirm Votes
+                        </Button>
+                      ) : (
+                        <p variant="contained" align="center" color="secondary">
+                          Confirmed!
+                        </p>
+                      )}
+                    </Grid>
                   </Grid>
-                </Grid>
-              </form>
+                </form>
+              )}
             </Grid>
           </Paper>
         </Grid>
