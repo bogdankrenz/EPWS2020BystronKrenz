@@ -9,6 +9,7 @@ import CreateParty from "./pages/CreateParty.js";
 import GuestRegistered from "./pages/GuestRegistered.js";
 import GuestWelcome from "./pages/GuestWelcome";
 import HostDashboard from "./pages/Dashboard.js";
+import SatisfactionVote from "./pages/SatisfactionVote.js";
 import backgroundImage from "./media/background.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,8 +43,9 @@ function App() {
               <Route path="/create">
                 <CreateParty setPartyID={setPartyID} />
               </Route>
-              <Route path="/party/:partyID" component={GuestRegistered}></Route>
               <Route path="/join/:partyID" component={GuestWelcome}></Route>
+              <Route path="/party/:partyID" component={GuestRegistered}></Route>
+              <Route path="/satisfaction/:partyID" component={SatisfactionVote}></Route>
               <Route path="/party" component={GuestRegistered}></Route>
               <Route path="/:partyID" component={HostDashboard}></Route>
             </Switch>
