@@ -4,11 +4,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Copyright from "../pages/CreateParty";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { ReactComponent as SpotifyLogo } from "../media/spotify-logo.svg";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -34,32 +34,39 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "relative",
   },
-  welcome: {
+  center: {
     textAlign: "center",
   },
   spotifyRedirect: {
-    marginBottom: "20px",
     width: "200px",
-    backgroundColor: "#90ee90",
+    height: "43px",
+    backgroundColor: "#FFFF",
+    textTransform: "none",
+    fontSize: 15,
+    fontWeight: "bold",
+    padding: "6px 12px",
+    borderRadius: 50,
+    boxShadow: "2px 2px 7px 2px #888888",
     "&:hover": {
-      backgroundColor: "#1DB954",
+      backgroundColor: "#191414",
+      color: "#FFFF",
     },
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginBottom: "0",
-      marginRight: "20px",
+  },
+  vote: {
+    width: "200px",
+    textTransform: "none",
+    fontSize: 15,
+    borderRadius: 50,
+    "&:hover": {
+      textDecorationLine: "underline",
+      color: "#191414",
+      backgroundColor: "transparent",
     },
   },
   logo: {
-    height: "25px",
-    width: "25px",
-  },
-  login: {
-    textAlign: "center",
-    padding: "30px",
-  },
-  noSpotifyRedirect: {
-    width: "200px",
-  },
+    height: "27px",
+    width: "27px",
+  }
 }));
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
@@ -96,7 +103,7 @@ export default function GuestWelcome() {
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes[0]}&state=${state}`;
   };
 
-  const noSpotifyRedirect = () => {
+  const vote = () => {
     window.location = `/party/${partyID}`;
   };
 
@@ -111,44 +118,36 @@ export default function GuestWelcome() {
       </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <div className={classes.header}>
-            <Typography variant="h4" gutterBottom className={classes.welcome}>
-              Welcome aboard!
-            </Typography>
-            <Typography variant="p" gutterBottom className={classes.info}>
-              This is a Spotify Powered App for getting everyone's music wish
-              come true!
-            </Typography>
-            <p></p>
-            <p>
-              You can decide if you want to contribute Songs for the Host by
-              signing in with your Spotify Account below.
-            </p>
-            <p>
-              If not, just join and see what others have been contributing so
-              far!
-            </p>
-          </div>
-          <div className={classes.login}>
-            <Button
-              variant="contained"
-              color=""
-              onClick={spotifyRedirect}
-              className={classes.spotifyRedirect}
-              startIcon={<SpotifyLogo className={classes.logo} />}
-            >
-              JOIN WITH SPOTIFY
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.noSpotifyRedirect}
-              onClick={noSpotifyRedirect}
-              startIcon={<FormatListNumberedIcon />}
-            >
-              SHOW THE LIST
-            </Button>
-          </div>
+          <Grid container spacing={3} align="center" direction="column">
+            <Grid item xs={11}>
+              <Typography variant="h4" gutterBottom className={classes.center}>
+                Welcome aboard!
+              </Typography>
+              <Typography variant="p" gutterBottom className={classes.center}>
+                This is a Spotify Powered App for getting everyone's music wish
+                come true! <br />
+                You can decide if you want to contribute Songs for
+                the Host by signing in with your Spotify Account below. If not,
+                just join and see what others have been contributing so far!
+              </Typography>
+            </Grid>
+            <Grid item xs={7}>
+              <Button
+                variant="contained"
+                onClick={spotifyRedirect}
+                className={classes.spotifyRedirect}
+                startIcon={<SpotifyLogo className={classes.logo} />}
+              >
+                Join with Spotify
+              </Button>
+              <Button
+                className={classes.vote}
+                onClick={vote}
+              >
+                Vote others songs
+              </Button>
+            </Grid>
+          </Grid>
         </Paper>
       </main>
     </div>
