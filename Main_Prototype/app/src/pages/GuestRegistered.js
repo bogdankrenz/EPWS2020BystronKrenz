@@ -188,7 +188,7 @@ export default function GuestRegistered() {
                 <CircularProgress />
               ) : (
                 <form className={classes.container} onSubmit={handleSubmit}>
-                  <Grid item xs={8}>
+                  <Grid item xs={11}>
                     <List dense className={classes.list}>
                       {songs.slice(0, 30).map((song) => {
                         const labelId = `checkbox-list-secondary-label-${song}`;
