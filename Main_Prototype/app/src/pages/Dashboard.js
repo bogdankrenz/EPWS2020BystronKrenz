@@ -18,7 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
-import SatisfactionChart from '../components/dashboard/SatisfactionChart';
+import Timer from '../components/dashboard/SatisfactionChart';
 import GuestCount from '../components/dashboard/GuestCount';
 import Playlist from '../components/dashboard/Playlist';
 
@@ -106,6 +106,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function createData(time, satRate) {
+  return { time, satRate };
+}
+
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -120,6 +124,9 @@ export default function Dashboard() {
   const [songs, setSongs] = useState("");
   const [guestCount, setGuestCount] = useState("");
 
+  var voting = 0
+  var votes = []
+
   // partyID is taken from query param and saved in the local storage
   const match = useRouteMatch();
   const partyID = match.params.partyID;
@@ -131,19 +138,35 @@ export default function Dashboard() {
       socket.emit("host", partyID)
     })
 
-    socket.on("satisfactionVote", (vote) => {
-      console.log(vote)
+    socket.on("satisfactionVote", (newVote) => {
+      voting = (voting + newVote) / 2
     });
 
     socket.on("dashboardUpdate", (songs, guestCount) => {
       setSongs(songs)
       setGuestCount(guestCount)
-
-      console.log(songs)
-      console.log(guestCount)
     });
 
   }, []);
+
+  const callback = () => {
+
+    votes.push(voting)
+
+    if (votes.length > 4) (
+      votes.shift()
+    )
+
+    var votingFinal = null
+    var votesSum = null
+
+    votes.forEach( vote => {votesSum += vote})
+    votingFinal = (votesSum/votes.length) * 10
+
+    console.log(votingFinal)
+    console.log(votes)
+    return votingFinal
+  };
 
   return (
     <div className={classes.root}>
@@ -185,19 +208,19 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
+            {/* Satisfaction Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <SatisfactionChart />
+                <Timer myCallback={callback} />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Guest Count */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <GuestCount guestCount={guestCount}/>
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Playlist */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Playlist songs={songs}/>
