@@ -2,6 +2,7 @@
 
 Gewählte Perspektive: **Web Development**  
 Projektziel: **Ermöglichung einer demokratisch basierten Musikwahl bei Partys und Veranstaltungen**
+Website: https://party-together.herokuapp.com - Die aktuelle Version wurde auf Safari getestet und läuft dort am besten 
 
 ## Exposé
 
@@ -43,19 +44,5 @@ Um dieses Ziele zu erreichen, werden wir einen Dienst entwickeln, in dem sich de
 
 Die wirtschaftliche Relevanz eines Dienstes der passgenaue Musik für Veranstaltungen zusammenstellt wird spätestens bei einem Blick in die Quellenbelege eminent. Doch wir gehen einen Schritt weiter und schaffen durch eine Reduzierung der nötigen Zeit am Smartphone zum Auswählen der Musik auch eine gesellschaftliche Relevanz. Wenn man sich heutzutage einmal umschaut, sieht man Menschen die ständig auf ihr Smartphone starren, sei es Social Media, Messanger oder sonstige Applikationen die unsere "undevided Attention" benötigen. Auf einer Party ist das nicht anders. Deshalb möchten wir mit unserem Projekt, eine Plattform entwickeln, die nicht unsere permanente Aufmerksamkeit erfordert. Browser öffnen, Anmelden, Party joinen und fertig! Daraus resultiert eine enorme gesellschaftliche Relevanz, da wir einen Dienst entwickeln der vollautomatisiert arbeitet. Das heißt kein langes Suchen und Starren auf das Handy. 
 Man kann so ganz dem Flow der Veranstaltung folgen, und die Zeit mit den Leuten genießen!
-
-
-### Artefakte für Audit 1
-
-- *Domänenmodell* - Verantwortlich Carlos Bystron (6 Std. eingeplant)
-- *Architekturdiagramm* - Verantwortlich Bogdan Krenz (8 Std. eingeplant)
-- *API Analyse* - Verantwortlich Carlos Bystron (4 Std. eingeplant)
-- *Zielhierachie* - Verantwortlich Carlos Bystron (2 Std. eingeplant)
-- *Fishbone Diagramm* - Verantwortlich Bogdan Krenz (2 Std. eingeplant)
-- *Projektplan* - Verantwortlich Bogdan Krenz, Carlos Bystron (2 Std. eingeplant)
-
-
-
-
 
 
