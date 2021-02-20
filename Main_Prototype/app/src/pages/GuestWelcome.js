@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import { ReactComponent as SpotifyLogo } from "../media/spotify-logo.svg";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import Grid from "@material-ui/core/Grid";
+import { FRONTEND_URL } from "../helpers/constants";
 
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -66,12 +67,12 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: "27px",
     width: "27px",
-  }
+  },
 }));
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "0be1f8b94d5e48599b0b2121080e8b67";
-const redirectUri = "http://localhost:3000/party";
+const redirectUri = `${FRONTEND_URL}/party`;
 const scopes = ["user-top-read"];
 const state = generateRandomString(16);
 window.location.hash = "";
@@ -106,7 +107,7 @@ export default function GuestWelcome() {
   const vote = () => {
     window.location = `/party/${partyID}`;
   };
-  
+
   return (
     <div className={classes.root}>
       <AppBar position="absolute" color="default" className={classes.appBar}>
@@ -126,9 +127,9 @@ export default function GuestWelcome() {
               <Typography variant="p" gutterBottom className={classes.center}>
                 This is a Spotify Powered App for getting everyone's music wish
                 come true! <br />
-                You can decide if you want to contribute Songs for
-                the Host by signing in with your Spotify Account below. If not,
-                just join and see what others have been contributing so far!
+                You can decide if you want to contribute Songs for the Host by
+                signing in with your Spotify Account below. If not, just join
+                and see what others have been contributing so far!
               </Typography>
             </Grid>
             <Grid item xs={7}>
@@ -140,10 +141,7 @@ export default function GuestWelcome() {
               >
                 Join with Spotify
               </Button>
-              <Button
-                className={classes.vote}
-                onClick={vote}
-              >
+              <Button className={classes.vote} onClick={vote}>
                 Vote others songs
               </Button>
             </Grid>
