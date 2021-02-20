@@ -1,7 +1,7 @@
 # EPWS2020BystronKrenz
 
 Gewählte Perspektive: **Web Development**  
-Projektziel: **Ermöglichung einer demokratisch basierten Musikwahl bei Partys und Veranstaltungen**
+Projektziel: **Ermöglichung einer demokratisch basierten Musikwahl bei Partys und Veranstaltungen** <br />
 Website: https://party-together.herokuapp.com - Die aktuelle Version wurde auf Safari getestet und läuft dort am besten 
 
 ## Exposé
