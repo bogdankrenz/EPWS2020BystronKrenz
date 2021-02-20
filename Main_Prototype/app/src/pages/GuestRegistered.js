@@ -16,7 +16,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import io from "socket.io-client";
 const ENDPOINT = "https://party-together-server.herokuapp.com";
@@ -57,6 +57,17 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "15px",
     marginTop: "15px",
   },
+  vote: {
+    width: "200px",
+    textTransform: "none",
+    fontSize: 15,
+    borderRadius: 50,
+    "&:hover": {
+      textDecorationLine: "underline",
+      color: "#191414",
+      backgroundColor: "transparent",
+    },
+  },
   center: {
     textAlign: "center",
   },
@@ -89,6 +100,10 @@ export default function GuestRegistered() {
 
     setChecked(newChecked);
     console.log(newChecked);
+  };
+
+  const satisfaction = () => {
+    window.location = `/satisfaction/${partyID}`;
   };
 
   const handleSubmit = (event) => {
@@ -227,9 +242,26 @@ export default function GuestRegistered() {
                           Confirm Votes
                         </Button>
                       ) : (
-                        <p variant="contained" align="center" color="secondary">
-                          Confirmed!
-                        </p>
+                        <Grid
+                          container
+                          align="center"
+                          direction="column"
+                        >
+                          <Grid item>
+                            <Typography gutterBottom className={classes.center}>
+                              Great, your votes were confirmed! <br />
+                              Another thing you could do is 👇🏼
+                            </Typography>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              className={classes.submit}
+                              onClick={satisfaction}
+                            >
+                              Rate the current music
+                            </Button>
+                          </Grid>
+                        </Grid>
                       )}
                     </Grid>
                   </Grid>

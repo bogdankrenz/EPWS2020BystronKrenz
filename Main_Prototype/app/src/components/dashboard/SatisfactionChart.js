@@ -15,26 +15,31 @@ import Title from "./Title";
 
 
 
-class Timer extends React.Component {
+class SatisfactionChart extends React.Component {
 
   constructor(props) {
     super(props);
+
+    var today = new Date(),
+    time = today.getHours() + ':' + today.getMinutes();
+
     this.state = {
       seconds: parseInt(props.startTimeInSeconds, 10) || 0,
-      satisfactionData: [this.createData("05:00", 5)],
+      currentTime: time,
+      satisfactionData: [],
       vote: props.myCallback
     };
   }
 
   tick() {
 
-    if (this.state.satisfactionData.length > 3) {
+    if (this.state.satisfactionData.length > 7) {
       this.state.satisfactionData.shift()
     }
 
     this.setState((state) => ({
       seconds: state.seconds + 1,
-      satisfactionData: [...state.satisfactionData, this.createData(this.formatTime(state.seconds), this.state.vote())]
+      satisfactionData: [...state.satisfactionData, this.createData(this.state.currentTime, this.state.vote())]
     }));
   }
 
@@ -48,16 +53,6 @@ class Timer extends React.Component {
 
   createData(time, satRate) {
     return { time, satRate };
-  }
-
-  formatTime(secs) {
-    let hours = Math.floor(secs / 3600);
-    let minutes = Math.floor(secs / 60) % 60;
-    let seconds = secs % 60;
-    return [hours, minutes, seconds]
-      .map((v) => ("" + v).padStart(2, "0"))
-      .filter((v, i) => v !== "00" || i > 0)
-      .join(":");
   }
 
   render() {
@@ -75,7 +70,7 @@ class Timer extends React.Component {
               left: 24,
             }}
           >
-            <XAxis dataKey="time" stroke={"#000000"} />
+            <XAxis dataKey="time" stroke={"#000000"} tick={false}/>
             <YAxis stroke={"#000000"} type="number" domain={[0, 100]}>
               <Label
                 angle={270}
@@ -98,30 +93,6 @@ class Timer extends React.Component {
   }
 }
 
-export default Timer
+export default SatisfactionChart
 
 
-
-
-
-
-
-
-
-
-function SatisfactionChart(params) {
-  
-
-  // const [satisfactionData, setSatisfactionData] = useState([]);
-
-  // useEffect(() => {
-  //   const vote = params.vote;
-  //   console.log(vote);
-
-  //   var newData = satisfactionData;
-  //   newData.push(createData("00:00", vote * 10));
-
-  //   setSatisfactionData(newData);
-  // }, []);
-
-}

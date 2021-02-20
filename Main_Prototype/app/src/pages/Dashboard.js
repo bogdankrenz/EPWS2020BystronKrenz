@@ -18,7 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
-import Timer from '../components/dashboard/SatisfactionChart';
+import SatisfactionChart from '../components/dashboard/SatisfactionChart';
 import GuestCount from '../components/dashboard/GuestCount';
 import Playlist from '../components/dashboard/Playlist';
 
@@ -124,7 +124,7 @@ export default function Dashboard() {
   const [songs, setSongs] = useState("");
   const [guestCount, setGuestCount] = useState("");
 
-  var voting = 0
+  var voting = 5
   var votes = []
 
   // partyID is taken from query param and saved in the local storage
@@ -211,7 +211,7 @@ export default function Dashboard() {
             {/* Satisfaction Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Timer myCallback={callback} />
+                <SatisfactionChart myCallback={callback} />
               </Paper>
             </Grid>
             {/* Guest Count */}

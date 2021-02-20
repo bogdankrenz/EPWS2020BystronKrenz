@@ -106,11 +106,7 @@ export default function GuestWelcome() {
   const vote = () => {
     window.location = `/party/${partyID}`;
   };
-
-  const satisfaction = () => {
-    window.location = `/party/${partyID}/vote`;
-  };
-
+  
   return (
     <div className={classes.root}>
       <AppBar position="absolute" color="default" className={classes.appBar}>
@@ -149,12 +145,6 @@ export default function GuestWelcome() {
                 onClick={vote}
               >
                 Vote others songs
-              </Button>
-              <Button
-                className={classes.vote}
-                onClick={satisfaction}
-              >
-                Vote your satisfaction
               </Button>
             </Grid>
           </Grid>
